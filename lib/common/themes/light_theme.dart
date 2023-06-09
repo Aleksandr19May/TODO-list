@@ -3,7 +3,7 @@ import 'package:todo_list/common/colors.dart';
 
 ThemeData lightTheme() => ThemeData(
   cardColor: Colors.red,
-   
+   appBarTheme: const AppBarTheme(color: AppColorsLightTheme.backPrimary),
       brightness: Brightness.dark,
       primaryColor: AppColorsLightTheme.primary,
       fontFamily: 'Roboto',

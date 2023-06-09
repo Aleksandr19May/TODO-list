@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       darkTheme: darkTheme(),
       theme: lightTheme(),
-      home: const MainPage(),
+      home: const SliverAppBarExample(),
     );
   }
 }
