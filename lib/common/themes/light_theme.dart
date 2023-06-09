@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:todo_list/common/colors.dart';
 
 ThemeData lightTheme() => ThemeData(
+  cardColor: Colors.red,
+   
       brightness: Brightness.dark,
       primaryColor: AppColorsLightTheme.primary,
       fontFamily: 'Roboto',
