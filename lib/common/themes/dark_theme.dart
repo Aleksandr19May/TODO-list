@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_list/common/colors.dart';
 ThemeData darkTheme() => ThemeData(
-      brightness: Brightness.dark,
+     cardColor: AppColorsDarkTheme.backSecondary,
       primaryColor: AppColorsDarkTheme.primary,
       fontFamily: 'Roboto',
       textTheme: const TextTheme(

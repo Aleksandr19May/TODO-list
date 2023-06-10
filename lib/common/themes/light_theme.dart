@@ -2,22 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:todo_list/common/colors.dart';
 
 ThemeData lightTheme() => ThemeData(
-  cardColor: Colors.red,
+  cardColor: AppColorsLightTheme.backSecondary,
    appBarTheme: const AppBarTheme(color: AppColorsLightTheme.backPrimary),
-      brightness: Brightness.dark,
+      
       primaryColor: AppColorsLightTheme.primary,
       fontFamily: 'Roboto',
       textTheme: const TextTheme(
-        titleLarge: TextStyle(fontWeight: FontWeight.w800, fontSize: 32),
+        displayMedium: TextStyle(fontWeight: FontWeight.w800, fontSize: 15), 
+        titleLarge: TextStyle(fontWeight: FontWeight.w800, fontSize: 15),
         titleMedium: TextStyle(fontSize: 26),
         bodyMedium: TextStyle(
-          fontSize: 18,
+          fontSize: 16,
+          height: 20/16
         ),
       ),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         backgroundColor: AppColorsLightTheme.blue,
         foregroundColor: AppColorsLightTheme.white,
       ),
+        
       buttonTheme: const ButtonThemeData(),
       scaffoldBackgroundColor: AppColorsLightTheme.backPrimary,
     );

@@ -1,5 +1,6 @@
-
 import 'package:flutter/material.dart';
+import 'package:todo_list/features/presentation/pages/task_edit_page.dart';
+import 'package:todo_list/features/presentation/widgets/task_list_widget.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({
@@ -14,17 +15,10 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       body: SingleChildScrollView(
-        child: Container(
-          decoration: BoxDecoration(),
-        )
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+          child: Container(
+        decoration: const BoxDecoration(),
+      )),
     );
   }
 }
@@ -37,49 +31,81 @@ class SliverAppBarExample extends StatefulWidget {
 }
 
 class _SliverAppBarExampleState extends State<SliverAppBarExample> {
-  bool _pinned = true;
- 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverAppBar(
-            pinned: _pinned,
-           
-            expandedHeight: 160.0,
-            flexibleSpace: const FlexibleSpaceBar(
-              title: Text('Мои дела'),
-              background: FlutterLogo(),
-            ),
-          ),
-          const SliverToBoxAdapter(
-            child: SizedBox(
-              height: 20,
-              child: Center(
-                child: Text('Выполнено - 5'),
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            const SliverAppBar(
+              pinned: true,
+              expandedHeight: 144,
+              flexibleSpace: FlexibleSpaceBar(
+                titlePadding: EdgeInsets.only(left: 80),
+                title: Text('Мои дела'),
               ),
             ),
-          ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                return Container(
-                  color: index.isOdd ? Colors.white : Colors.black12,
-                  height: 100.0,
-                  child: Center(
-                    child: Text('$index', textScaleFactor: 5),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 20,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 80, right: 25),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text('Выполнено - 5'),
+                      InkWell(
+                        onTap: () {},
+                        child: Image.asset(
+                          'assets/icons/visibility.png',
+                        ),
+                      ),
+                    ],
                   ),
-                );
-              },
-              childCount: 20,
+                ),
+              ),
             ),
-          ),
-        ],
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (BuildContext context, int index) {
+                  return const Padding(
+                    padding:
+                        EdgeInsets.only(left: 8, right: 8, top: 18, bottom: 30),
+                    child: Card(
+                      semanticContainer: false,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                      ),
+                      elevation: 4,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TaskListWidget(),
+                          Padding(
+                            padding:
+                                EdgeInsets.only(left: 72, bottom: 14, top: 14),
+                            child: Text('Новое'),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+                childCount: 1,
+              ),
+            ),
+          ],
+        ),
       ),
-     
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+          return const TaskEditPage();
+        }))
+          
+        ,
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }
