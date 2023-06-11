@@ -37,15 +37,21 @@ class _SliverAppBarExampleState extends State<SliverAppBarExample> {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            const SliverAppBar(
+            SliverAppBar(
               pinned: true,
               expandedHeight: 144,
+             
               flexibleSpace: FlexibleSpaceBar(
                 titlePadding: EdgeInsets.only(left: 80),
-                title: Text('Мои дела'),
+                title: Text(
+                  'Мои дела',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
               ),
             ),
+           
             SliverToBoxAdapter(
+              
               child: SizedBox(
                 height: 20,
                 child: Padding(
@@ -99,11 +105,10 @@ class _SliverAppBarExampleState extends State<SliverAppBarExample> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+        onPressed: () =>
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
           return const TaskEditPage();
-        }))
-          
-        ,
+        })),
         child: const Icon(Icons.add),
       ),
     );

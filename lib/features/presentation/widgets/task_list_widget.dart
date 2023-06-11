@@ -9,7 +9,7 @@ class TaskListWidget extends StatefulWidget {
   State<TaskListWidget> createState() => _TaskListWidgetState();
 }
 
-final List<bool> checkedList = List.generate(3, (index) => false);
+final List<bool> checkedList = List.generate(15, (index) => false);
 
 class _TaskListWidgetState extends State<TaskListWidget> {
   @override
@@ -54,9 +54,10 @@ class _TaskListWidgetState extends State<TaskListWidget> {
               ),
             ),
             child: CheckboxListTile(
+           
               checkColor: Colors.white,
               fillColor: const MaterialStatePropertyAll(Colors.green),
-              title: const Text('Купить что-то'),
+              title:  Text('Купить чfg-то',style: Theme.of(context).textTheme.titleMedium,),
               value: provider.checked,
               onChanged: (bool? value) {
                 provider.changeValue(value!);

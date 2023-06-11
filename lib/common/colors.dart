@@ -5,7 +5,7 @@ abstract class AppColorsLightTheme {
   static const Color overlay = Color(0xFF0F0000);
   static const Color primary = Color(0xFF000000);
   static const Color secondory = Color(0xFF990000);
-  static const Color tertiary = Color(0xFF4D0000);
+  static const Color tertiary = Color.fromRGBO(0, 0, 0, 0.3);
   static const Color disable = Color(0xFF260000);
   static const Color red = Color(0xFF3B3000);
   static const Color green = Color(0xFF34C759);
