@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_list/common/colors.dart';
@@ -13,10 +11,20 @@ class TaskEditPage extends StatefulWidget {
 }
 
 class _TaskEditPageState extends State<TaskEditPage> {
+  final TextEditingController _textcontroller = TextEditingController();
+
+  @override
+  void dispose() {
+    _textcontroller.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     ProviderTask provider = Provider.of<ProviderTask>(context);
     double widthScreen = MediaQuery.of(context).size.width;
+    int allTaskLenght = provider.listAllTask.length;
     return Scaffold(
       body: SafeArea(
         child: CustomScrollView(
@@ -37,10 +45,21 @@ class _TaskEditPageState extends State<TaskEditPage> {
                         'assets/icons/close.png',
                       ),
                     ),
-                    const Text(
-                      'Сохранить',
-                      style: TextStyle(
-                          fontSize: 16, color: AppColorsLightTheme.blue),
+                    InkWell(
+                      onTap: () {
+                        provider.createTask(
+                            _textcontroller.text,
+                            false,
+                            'нет',
+                            '${provider.day}');
+                        provider.changeSwitcher(false);
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text(
+                        'Сохранить',
+                        style: TextStyle(
+                            fontSize: 16, color: AppColorsLightTheme.blue),
+                      ),
                     ),
                   ],
                 ),
@@ -52,18 +71,27 @@ class _TaskEditPageState extends State<TaskEditPage> {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Padding(
-                        padding:
-                            EdgeInsets.only(left: 16.0, right: 16, top: 23),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 16.0, right: 16, top: 23),
                         child: Card(
                           margin: EdgeInsets.zero,
                           semanticContainer: false,
-                          shape: RoundedRectangleBorder(
+                          shape: const RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(8.0)),
                           ),
                           elevation: 4,
-                          child: TextField(),
+                          child: TextField(
+                            textInputAction: TextInputAction.done,
+                            decoration: const InputDecoration(
+                              contentPadding: EdgeInsets.all(16),
+                              hintText: 'Что надо сделать...',
+                              border: InputBorder.none,
+                            ),
+                            controller: _textcontroller,
+                            maxLines: null,
+                          ),
                         ),
                       ),
                       const SizedBox(
@@ -76,7 +104,29 @@ class _TaskEditPageState extends State<TaskEditPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text('Важность'),
-                            InkWell(onTap: () {}, child: const Text('Нет')),
+                            DropdownButton<int>(
+                                value: 0,
+                                iconSize: 0,
+                                elevation: 8,
+                                alignment: Alignment.topLeft,
+                                onChanged: (value) {
+                                 
+                                  setState(() {});
+                                },
+                                items: const [
+                                  DropdownMenuItem(
+                                    value: 0,
+                                    child: Text('Нет'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 1,
+                                    child: Text('Низкий'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 2,
+                                    child: Text('!! Высокий'),
+                                  ),
+                                ]),
                           ],
                         )),
                       ),
@@ -98,7 +148,7 @@ class _TaskEditPageState extends State<TaskEditPage> {
                         child: ListTile(
                           minLeadingWidth: widthScreen,
                           contentPadding: EdgeInsets.zero,
-                          subtitle:  Text(provider.day!),
+                          subtitle: Text(provider.day!),
                           title: const Text('Сделать до'),
                           trailing: Switch(
                             materialTapTargetSize:
@@ -168,7 +218,6 @@ class _TaskEditPageState extends State<TaskEditPage> {
       lastDate: DateTime(2025),
       locale: const Locale('ru'),
     ).then((value) {
-      
       provider.changeDate(value);
     });
   }

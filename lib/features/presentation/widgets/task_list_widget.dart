@@ -9,8 +9,6 @@ class TaskListWidget extends StatefulWidget {
   State<TaskListWidget> createState() => _TaskListWidgetState();
 }
 
-final List<bool> checkedList = List.generate(15, (index) => false);
-
 class _TaskListWidgetState extends State<TaskListWidget> {
   @override
   Widget build(BuildContext context) {
@@ -18,8 +16,10 @@ class _TaskListWidgetState extends State<TaskListWidget> {
     return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: checkedList.length,
+      itemCount: provider.listAllTask.length,
       itemBuilder: (context, index) {
+        List allTask = provider.listAllTask;
+        print(allTask);
         return ClipRect(
           child: Dismissible(
             confirmDismiss: (direction) =>
@@ -28,11 +28,11 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                     : Future.value(true),
             onUpdate: (details) {},
             resizeDuration: const Duration(seconds: 1),
-            key: ValueKey(checkedList[index]),
+            key: ValueKey(allTask[index]),
             direction: DismissDirection.horizontal,
             onDismissed: (direction) {
               if (direction == DismissDirection.endToStart) {
-                checkedList.removeAt(index);
+              provider.deleteTask(index);
               }
             },
             secondaryBackground: Container(
@@ -65,9 +65,10 @@ class _TaskListWidgetState extends State<TaskListWidget> {
               ),
               enabled: false,
               title: Text(
-                'Купить чfg-то',
+                allTask[index][0] ?? '',
                 style: Theme.of(context).textTheme.titleMedium,
               ),
+              subtitle: Text(allTask[index][3] ?? ""),
               trailing: Image.asset(
                 'assets/icons/info_outline.png',
                 color: const Color.fromRGBO(0, 0, 0, 0.3),

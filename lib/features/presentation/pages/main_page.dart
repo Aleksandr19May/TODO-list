@@ -30,8 +30,7 @@ class SliverAppBarExample extends StatefulWidget {
   State<SliverAppBarExample> createState() => _SliverAppBarExampleState();
 }
 
- late DateTime selectedDate;
- 
+late DateTime selectedDate;
 
 class _SliverAppBarExampleState extends State<SliverAppBarExample> {
   @override
@@ -43,18 +42,15 @@ class _SliverAppBarExampleState extends State<SliverAppBarExample> {
             SliverAppBar(
               pinned: true,
               expandedHeight: 144,
-             
               flexibleSpace: FlexibleSpaceBar(
-                titlePadding: EdgeInsets.only(left: 80),
+                titlePadding: const EdgeInsets.only(left: 80),
                 title: Text(
                   'Мои дела',
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
               ),
             ),
-           
             SliverToBoxAdapter(
-              
               child: SizedBox(
                 height: 20,
                 child: Padding(
@@ -77,12 +73,12 @@ class _SliverAppBarExampleState extends State<SliverAppBarExample> {
             SliverList(
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
-                  return const Padding(
+                  return Padding(
                     padding:
-                        EdgeInsets.only(left: 8, right: 8, top: 18, bottom: 30),
+                        const EdgeInsets.only(left: 8, right: 8, top: 18, bottom: 30),
                     child: Card(
                       semanticContainer: false,
-                      shape: RoundedRectangleBorder(
+                      shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(8.0)),
                       ),
                       elevation: 4,
@@ -90,11 +86,16 @@ class _SliverAppBarExampleState extends State<SliverAppBarExample> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          TaskListWidget(),
+                          const TaskListWidget(),
                           Padding(
                             padding:
-                                EdgeInsets.only(left: 72, bottom: 14, top: 14),
-                            child: Text('Новое'),
+                                const EdgeInsets.only(left: 72, bottom: 14, top: 14),
+                            child: InkWell(
+                                onTap: () => Navigator.of(context).push(
+                                        MaterialPageRoute(builder: (context) {
+                                      return const TaskEditPage();
+                                    })),
+                                child: const Text('Новое')),
                           ),
                         ],
                       ),
