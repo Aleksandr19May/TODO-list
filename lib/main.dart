@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_list/common/themes/dark_theme.dart';
-import 'package:todo_list/common/themes/light_theme.dart';
+// import 'package:todo_list/common/themes/dark_theme.dart';
+// import 'package:todo_list/common/themes/light_theme.dart';
 import 'package:todo_list/features/presentation/bloc/task_list_bloc.dart';
 import 'package:todo_list/features/presentation/pages/main_page.dart';
 import 'package:todo_list/features/presentation/provider/provider.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
+
 
 void main() {
+  initializeDateFormatting('ru', null).then((_) {
   runApp(
     MultiProvider(
       providers: [
@@ -17,7 +23,7 @@ void main() {
       ],
       child: const MyApp(),
     ),
-  );
+  );});
 }
 
 class MyApp extends StatelessWidget {
@@ -34,10 +40,19 @@ class MyApp extends StatelessWidget {
                 ),
           ),
         ],
-        child: MaterialApp(
-          darkTheme: darkTheme(),
-          theme: lightTheme(),
-          home: const SliverAppBarExample(),
+        child: const MaterialApp(
+          localizationsDelegates: [
+         GlobalMaterialLocalizations.delegate
+         , GlobalWidgetsLocalizations.delegate,
+           GlobalCupertinoLocalizations.delegate,
+       ],
+       supportedLocales: [
+         Locale('ru'),
+        
+       ],
+          // darkTheme: darkTheme(),
+          // theme: lightTheme(),
+          home: SliverAppBarExample(),
         ));
   }
 }

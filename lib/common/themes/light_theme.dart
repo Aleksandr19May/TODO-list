@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todo_list/common/colors.dart';
 
 ThemeData lightTheme() => ThemeData(
+
       cardColor: AppColorsLightTheme.backSecondary,
       appBarTheme: const AppBarTheme(color: AppColorsLightTheme.backPrimary),
       primaryColor: AppColorsLightTheme.primary,
@@ -34,6 +35,6 @@ ThemeData lightTheme() => ThemeData(
         backgroundColor: AppColorsLightTheme.blue,
         foregroundColor: AppColorsLightTheme.white,
       ),
-      buttonTheme: const ButtonThemeData(buttonColor: AppColorsLightTheme.blue),
+      // buttonTheme: const ButtonThemeData(buttonColor: AppColorsLightTheme.blue),
       scaffoldBackgroundColor: AppColorsLightTheme.backPrimary,
     );

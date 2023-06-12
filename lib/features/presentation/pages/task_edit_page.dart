@@ -1,5 +1,9 @@
+
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_list/common/colors.dart';
+import 'package:todo_list/features/presentation/provider/provider.dart';
 
 class TaskEditPage extends StatefulWidget {
   const TaskEditPage({super.key});
@@ -11,6 +15,7 @@ class TaskEditPage extends StatefulWidget {
 class _TaskEditPageState extends State<TaskEditPage> {
   @override
   Widget build(BuildContext context) {
+    ProviderTask provider = Provider.of<ProviderTask>(context);
     double widthScreen = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SafeArea(
@@ -32,16 +37,14 @@ class _TaskEditPageState extends State<TaskEditPage> {
                         'assets/icons/close.png',
                       ),
                     ),
-                  
                     const Text(
                       'Сохранить',
-                      style:
-                          TextStyle(fontSize: 16, color: AppColorsLightTheme.blue),
+                      style: TextStyle(
+                          fontSize: 16, color: AppColorsLightTheme.blue),
                     ),
                   ],
                 ),
               ),
-              
             ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
@@ -50,7 +53,8 @@ class _TaskEditPageState extends State<TaskEditPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Padding(
-                        padding: EdgeInsets.symmetric(horizontal:16.0),
+                        padding:
+                            EdgeInsets.only(left: 16.0, right: 16, top: 23),
                         child: Card(
                           margin: EdgeInsets.zero,
                           semanticContainer: false,
@@ -63,72 +67,81 @@ class _TaskEditPageState extends State<TaskEditPage> {
                         ),
                       ),
                       const SizedBox(
-                        height: 20,
-                      ),
-                       Padding(
-                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                         child: SizedBox(child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-                                          
-                          children: [
-                         const Text('Важность'),
-                         InkWell(
-                          onTap: () {
-                            
-                          },
-                          child: const Text('Нет')),
-                          ],
-                                             )),
-                       ),
-                   const SizedBox(
-                        height: 50,
-                      ),
-                         const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16.0),
-                           child: Divider(height: 0.5,thickness: 1,),
-                         ),
-                           const SizedBox(
-                        height: 50,
+                        height: 28,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left:16.0,right: 8),
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: SizedBox(
+                            child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text('Важность'),
+                            InkWell(onTap: () {}, child: const Text('Нет')),
+                          ],
+                        )),
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Divider(
+                          height: 0.5,
+                          thickness: 1,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 16.0, right: 8),
                         child: ListTile(
-                        
-                         minLeadingWidth: widthScreen,
-                         contentPadding: EdgeInsets.zero,
-                                          
-                          subtitle: const Text('data'),
+                          minLeadingWidth: widthScreen,
+                          contentPadding: EdgeInsets.zero,
+                          subtitle:  Text(provider.day!),
                           title: const Text('Сделать до'),
                           trailing: Switch(
-                      
-                            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                          value: true,
-                          onChanged: (value) {},
-                                              ),  ),
+                            materialTapTargetSize:
+                                MaterialTapTargetSize.shrinkWrap,
+                            value: provider.switcher,
+                            onChanged: (value) async {
+                              provider.changeSwitcher(value);
+                              if (provider.switcher) {
+                                await selectTaskDate(context, provider);
+                              }
+                            },
+                          ),
+                        ),
                       ),
-                      
                       const SizedBox(
-                        height: 50,
+                        height: 40,
                       ),
-                      const Divider(height: 0.5,thickness: 1,),
-                       const SizedBox(
-                        height: 50,
+                      const Divider(
+                        height: 0.5,
+                        thickness: 1,
+                      ),
+                      const SizedBox(
+                        height: 22,
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal:21.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 21.0),
                         child: Row(
                           children: [
                             Image.asset(
                               'assets/icons/delete.png',
                               color: Colors.red,
                             ),
-                            const SizedBox(width: 10,),
-                             InkWell(
-                              onTap: () {
-                                
-                              },
-                              child: const Text(
-                                'Удалить',
-                                style: TextStyle(color: Colors.red),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            InkWell(
+                              onTap: () {},
+                              child: InkWell(
+                                onTap: () {},
+                                child: const Text(
+                                  'Удалить',
+                                  style: TextStyle(color: Colors.red),
+                                ),
                               ),
                             ),
                           ],
@@ -144,5 +157,19 @@ class _TaskEditPageState extends State<TaskEditPage> {
         ),
       ),
     );
+  }
+
+  Future<void> selectTaskDate(
+      BuildContext context, ProviderTask provider) async {
+    await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2020),
+      lastDate: DateTime(2025),
+      locale: const Locale('ru'),
+    ).then((value) {
+      
+      provider.changeDate(value);
+    });
   }
 }

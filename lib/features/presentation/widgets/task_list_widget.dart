@@ -53,18 +53,22 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                 color: Colors.white,
               ),
             ),
-            child: CheckboxListTile(
-           
-              checkColor: Colors.white,
-              fillColor: const MaterialStatePropertyAll(Colors.green),
-              title:  Text('Купить чfg-то',style: Theme.of(context).textTheme.titleMedium,),
-              value: provider.checked,
-              onChanged: (bool? value) {
-                provider.changeValue(value!);
-                provider.checked = value;
-              },
-              controlAffinity: ListTileControlAffinity.leading,
-              secondary: Image.asset(
+            child: ListTile(
+              leading: Checkbox(
+                checkColor: Colors.white,
+                fillColor: const MaterialStatePropertyAll(Colors.green),
+                value: provider.checkBox,
+                onChanged: (bool? value) {
+                  provider.changeValue(value!);
+                  provider.checkBox = value;
+                },
+              ),
+              enabled: false,
+              title: Text(
+                'Купить чfg-то',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              trailing: Image.asset(
                 'assets/icons/info_outline.png',
                 color: const Color.fromRGBO(0, 0, 0, 0.3),
               ),

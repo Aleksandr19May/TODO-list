@@ -30,6 +30,9 @@ class SliverAppBarExample extends StatefulWidget {
   State<SliverAppBarExample> createState() => _SliverAppBarExampleState();
 }
 
+ late DateTime selectedDate;
+ 
+
 class _SliverAppBarExampleState extends State<SliverAppBarExample> {
   @override
   Widget build(BuildContext context) {
