@@ -19,7 +19,6 @@ class _TaskListWidgetState extends State<TaskListWidget> {
       itemCount: provider.listAllTask.length,
       itemBuilder: (context, index) {
         List allTask = provider.listAllTask;
-        print(allTask);
         return ClipRect(
           child: Dismissible(
             confirmDismiss: (direction) =>
@@ -32,7 +31,7 @@ class _TaskListWidgetState extends State<TaskListWidget> {
             direction: DismissDirection.horizontal,
             onDismissed: (direction) {
               if (direction == DismissDirection.endToStart) {
-              provider.deleteTask(index);
+                provider.deleteTask(index);
               }
             },
             secondaryBackground: Container(

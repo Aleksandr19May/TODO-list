@@ -24,7 +24,7 @@ class _TaskEditPageState extends State<TaskEditPage> {
   Widget build(BuildContext context) {
     ProviderTask provider = Provider.of<ProviderTask>(context);
     double widthScreen = MediaQuery.of(context).size.width;
-    int allTaskLenght = provider.listAllTask.length;
+
     return Scaffold(
       body: SafeArea(
         child: CustomScrollView(
@@ -47,10 +47,7 @@ class _TaskEditPageState extends State<TaskEditPage> {
                     ),
                     InkWell(
                       onTap: () {
-                        provider.createTask(
-                            _textcontroller.text,
-                            false,
-                            'нет',
+                        provider.createTask(_textcontroller.text, false, 'нет',
                             '${provider.day}');
                         provider.changeSwitcher(false);
                         Navigator.of(context).pop();
@@ -74,15 +71,18 @@ class _TaskEditPageState extends State<TaskEditPage> {
                       Padding(
                         padding: const EdgeInsets.only(
                             left: 16.0, right: 16, top: 23),
-                        child: Card(
-                          margin: EdgeInsets.zero,
-                          semanticContainer: false,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(8.0)),
-                          ),
-                          elevation: 4,
+                        child: Container(
+                          color: ThemeData().cardColor,
+                          height: 104,
+                          // margin: EdgeInsets.zero,
+                          // semanticContainer: false,
+                          // shape: const RoundedRectangleBorder(
+                          //   borderRadius:
+                          //       BorderRadius.all(Radius.circular(8.0)),
+                          // ),
+                          // elevation: 4,
                           child: TextField(
+                            // style: TextStyle(height:5 ),
                             textInputAction: TextInputAction.done,
                             decoration: const InputDecoration(
                               contentPadding: EdgeInsets.all(16),
@@ -105,13 +105,12 @@ class _TaskEditPageState extends State<TaskEditPage> {
                           children: [
                             const Text('Важность'),
                             DropdownButton<int>(
-                                value: 0,
+                                value: provider.priority,
                                 iconSize: 0,
                                 elevation: 8,
                                 alignment: Alignment.topLeft,
                                 onChanged: (value) {
-                                 
-                                  setState(() {});
+                                  provider.changePriority(value);
                                 },
                                 items: const [
                                   DropdownMenuItem(
@@ -124,7 +123,11 @@ class _TaskEditPageState extends State<TaskEditPage> {
                                   ),
                                   DropdownMenuItem(
                                     value: 2,
-                                    child: Text('!! Высокий'),
+                                    child: Text(
+                                      '!! Высокий',
+                                      style: TextStyle(
+                                          color: AppColorsLightTheme.red),
+                                    ),
                                   ),
                                 ]),
                           ],
@@ -148,7 +151,9 @@ class _TaskEditPageState extends State<TaskEditPage> {
                         child: ListTile(
                           minLeadingWidth: widthScreen,
                           contentPadding: EdgeInsets.zero,
-                          subtitle: Text(provider.day!),
+                          subtitle: provider.switcher
+                              ? Text(provider.day!)
+                              : const Text(''),
                           title: const Text('Сделать до'),
                           trailing: Switch(
                             materialTapTargetSize:
@@ -177,20 +182,34 @@ class _TaskEditPageState extends State<TaskEditPage> {
                         padding: const EdgeInsets.symmetric(horizontal: 21.0),
                         child: Row(
                           children: [
-                            Image.asset(
-                              'assets/icons/delete.png',
-                              color: Colors.red,
+                            AbsorbPointer(
+                              absorbing: provider.isnewTask ? true : false,
+                              child: InkWell(
+                                onTap: () => {},
+                                child: Image.asset(
+                                  'assets/icons/delete.png',
+                                  color: provider.isnewTask
+                                      ? AppColorsLightTheme.disable
+                                      : Colors.red,
+                                ),
+                              ),
                             ),
                             const SizedBox(
                               width: 10,
                             ),
-                            InkWell(
-                              onTap: () {},
+                            AbsorbPointer(
+                              absorbing: provider.isnewTask ? true : false,
                               child: InkWell(
-                                onTap: () {},
-                                child: const Text(
-                                  'Удалить',
-                                  style: TextStyle(color: Colors.red),
+                                onTap: () => {},
+                                child: InkWell(
+                                  onTap: () {},
+                                  child: Text(
+                                    'Удалить',
+                                    style: TextStyle(
+                                        color: provider.isnewTask
+                                            ? AppColorsLightTheme.disable
+                                            : Colors.red),
+                                  ),
                                 ),
                               ),
                             ),

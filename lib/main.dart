@@ -6,10 +6,9 @@ import 'package:provider/provider.dart';
 import 'package:todo_list/features/presentation/bloc/task_list_bloc.dart';
 import 'package:todo_list/features/presentation/pages/main_page.dart';
 import 'package:todo_list/features/presentation/provider/provider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:intl/intl.dart';
+
 
 
 void main() {

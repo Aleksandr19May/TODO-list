@@ -40,6 +40,15 @@ class ProviderTask extends ChangeNotifier {
     day = DateFormat('dd MMMM yyyy', 'ru').format(selectedDate!);
     notifyListeners();
   }
+
+  bool isnewTask = true;
+
+  int? priority = 0;
+
+  void changePriority(int? value) {
+    priority = value;
+    notifyListeners();
+  }
 }
 
 

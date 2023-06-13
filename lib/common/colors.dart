@@ -6,8 +6,8 @@ abstract class AppColorsLightTheme {
   static const Color primary = Color(0xFF000000);
   static const Color secondory = Color(0xFF990000);
   static const Color tertiary = Color.fromRGBO(0, 0, 0, 0.3);
-  static const Color disable = Color(0xFF260000);
-  static const Color red = Color(0xFF3B3000);
+  static const Color disable = Color.fromRGBO(0, 0, 0, 0.15);
+  static const Color red = Color.fromRGBO(255, 59, 48, 1);
   static const Color green = Color(0xFF34C759);
   static const Color blue = Color(0xFF007AFF);
   static const Color gray = Color(0xFF8E8E93);
