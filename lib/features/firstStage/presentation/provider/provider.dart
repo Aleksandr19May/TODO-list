@@ -17,9 +17,9 @@ class ProviderTask extends ChangeNotifier {
 
   bool? checkBox = true;
 
-  void changeValue(bool? value) {
-    if (checkBox = !value!) {
-      checkBox = value;
+  void changeValue(bool? value, int index) {
+    if (listAllTask[index][1] = !value!) {
+      listAllTask[index][1] = value;
     }
     notifyListeners();
   }
@@ -33,66 +33,38 @@ class ProviderTask extends ChangeNotifier {
 
   DateTime? selectedDate =
       DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
-  String? day = DateFormat('dd MMMM yyyy', 'ru').format(DateTime.now());
+
+  DateTime currentDate =
+      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+
+  String? selectedDay = DateFormat('dd MMMM yyyy', 'ru').format(DateTime.now());
 
   void changeDate(DateTime? date) {
     selectedDate = date;
-    day = DateFormat('dd MMMM yyyy', 'ru').format(selectedDate!);
+    selectedDay = DateFormat('dd MMMM yyyy', 'ru').format(selectedDate!);
     notifyListeners();
   }
 
   bool isnewTask = true;
 
   int? priority = 0;
-  
 
   void changePriority(int? value) {
     priority = value;
     notifyListeners();
   }
+
+  int completedTasks = 0;
+
+  void countAllCompletedTasks() {
+    int counter = 0;
+    for (List<dynamic> sublist in listAllTask) {
+      if (sublist[1] == true) {
+        counter++;
+      }
+    }
+    completedTasks = counter;
+
+    notifyListeners();
+  }
 }
-
-
-
-// class ProviderTask extends ChangeNotifier {
-
-//   Map<int,List> mapAllTask = {};
-
-
-//   void createTask (int index, String taskTitle, bool completed, String priority, String date) {
-//       mapAllTask[index] = [taskTitle,completed,priority,date];
-//       notifyListeners();
-//   }
-
-//    void deleteTask (int mapIndex) {
-//       mapAllTask.remove(mapIndex);
-//     notifyListeners();
-//    }
-
-
-//   bool? checkBox = true;
-
-//   void changeValue(bool? value) {
-//     if (checkBox = !value!) {
-//       checkBox = value;
-//     }
-//     notifyListeners();
-//   }
-
-//   bool switcher = false;
-
-//   void changeSwitcher(bool value) {
-//     switcher = value;
-//     notifyListeners();
-//   }
-
-//   DateTime? selectedDate =
-//   DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
-//   String? day = DateFormat('dd MMMM yyyy', 'ru').format(DateTime.now());
-
-//   void changeDate(DateTime? date) {
-//     selectedDate = date;
-//     day = DateFormat('dd MMMM yyyy', 'ru').format(selectedDate!);
-//     notifyListeners();
-//   }
-// }

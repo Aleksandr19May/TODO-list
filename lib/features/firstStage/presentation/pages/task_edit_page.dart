@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:todo_list/common/colors.dart';
 import 'package:todo_list/features/firstStage/presentation/provider/provider.dart';
 
-
 class TaskEditPage extends StatefulWidget {
   const TaskEditPage({super.key});
 
@@ -48,9 +47,10 @@ class _TaskEditPageState extends State<TaskEditPage> {
                     ),
                     InkWell(
                       onTap: () {
-                        provider.createTask(_textcontroller.text, false, provider.priority,
-                            '${provider.day}');
+                        provider.createTask(_textcontroller.text, false,
+                        provider.priority, '${provider.selectedDay}');
                         provider.changeSwitcher(false);
+                        provider.changePriority(0);
                         Navigator.of(context).pop();
                       },
                       child: const Text(
@@ -157,7 +157,7 @@ class _TaskEditPageState extends State<TaskEditPage> {
                           minLeadingWidth: widthScreen,
                           contentPadding: EdgeInsets.zero,
                           subtitle: provider.switcher
-                              ? Text(provider.day!)
+                              ? Text(provider.selectedDay!)
                               : const Text(''),
                           title: const Text('Сделать до'),
                           trailing: Switch(
