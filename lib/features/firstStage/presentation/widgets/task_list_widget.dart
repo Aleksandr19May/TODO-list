@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -14,13 +16,15 @@ class _TaskListWidgetState extends State<TaskListWidget> {
   @override
   Widget build(BuildContext context) {
     ProviderTask provider = Provider.of<ProviderTask>(context);
+    List allTask = provider.showedAllTasks
+        ? provider.listAllTasks
+        : provider.listUncomletedTasks;
+
     return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: provider.listAllTask.length,
+      itemCount: allTask.length,
       itemBuilder: (context, index) {
-        List allTask = provider.listAllTask;
-
         return ClipRect(
           child: Dismissible(
             confirmDismiss: (direction) =>
@@ -63,7 +67,7 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                   if (states.contains(MaterialState.selected)) {
                     return Colors.green;
                   }
-                  final DateTime taskDay =
+                  final DateTime taskDay = allTask[index][3] == '' ? provider.currentDate :
                       DateFormat('dd MMMM yyyy', 'ru').parse(allTask[index][3]);
                   if (taskDay.isBefore(provider.currentDate)) {
                     return Colors.red;
@@ -73,9 +77,11 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                 }),
                 value: allTask[index][1],
                 onChanged: (bool? value) {
-                  provider.changeValue(value!, index);
+                  provider.changeValue(value, index);
                   allTask[index][1] = value;
                   provider.countAllCompletedTasks();
+
+                  provider.getUncompletedTasks();
                 },
               ),
               enabled: false,
@@ -95,8 +101,11 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                       ),
                       TextSpan(
                         text: " ${allTask[index][0]}",
-                        style: TextStyle(decoration: allTask[index][1] ?TextDecoration.lineThrough : TextDecoration.none, color: Colors.black ),
-                        
+                        style: TextStyle(
+                            decoration: allTask[index][1]
+                                ? TextDecoration.lineThrough
+                                : TextDecoration.none,
+                            color: Colors.black),
                       ),
                     ],
                   ),

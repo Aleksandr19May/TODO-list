@@ -48,9 +48,12 @@ class _TaskEditPageState extends State<TaskEditPage> {
                     InkWell(
                       onTap: () {
                         provider.createTask(_textcontroller.text, false,
-                        provider.priority, '${provider.selectedDay}');
+                        provider.priority, provider.switcher ?'${provider.selectedDay}': '');
                         provider.changeSwitcher(false);
                         provider.changePriority(0);
+                      
+                       provider.getUncompletedTasks();
+                     
                         Navigator.of(context).pop();
                       },
                       child: const Text(

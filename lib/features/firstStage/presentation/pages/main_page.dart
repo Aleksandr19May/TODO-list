@@ -64,8 +64,18 @@ class _SliverAppBarExampleState extends State<SliverAppBarExample> {
                     children: [
                        Text('Выполнено - ${provider.completedTasks}'),
                       InkWell(
-                        onTap: () {},
-                        child: Image.asset(
+                        onTap: () {
+                          provider.changedshow();
+                          if (!provider.showedAllTasks) {
+                           
+                          provider.getUncompletedTasks();
+                          
+                          }
+                          
+                          print("все таски ${provider.listAllTasks}");
+                          print("невыполненные таски ${provider.listUncomletedTasks}");
+                        },
+                        child: Image.asset( provider.showedAllTasks ? 'assets/icons/visibility_off.png' :
                           'assets/icons/visibility.png',
                         ),
                       ),

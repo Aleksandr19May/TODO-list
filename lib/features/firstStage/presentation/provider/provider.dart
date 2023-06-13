@@ -2,24 +2,63 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class ProviderTask extends ChangeNotifier {
-  List<List> listAllTask = [];
+  List<List> listAllTasks = [];
+  List<List> listUncomletedTasks = [];
+  List<List> temporarylistTasks = [];
+  bool showedAllTasks = false;
+  int selectedIndex = 0;
+
+  void changedshow() {
+    if (!showedAllTasks) {
+      showedAllTasks = true;
+    } else {
+      showedAllTasks = false;
+    }
+    notifyListeners();
+  }
+
+  // void getTemporarylist() {
+  //   temporarylistTasks.clear();
+  //   temporarylistTasks.addAll(listAllTasks);
+
+  //   temporarylistTasks.removeWhere((element) => element[1] == true);
+
+  //   notifyListeners();
+  // }
+
+  void getUncompletedTasks() {
+    List<List<dynamic>> newlist = [];
+    print(listUncomletedTasks);
+    newlist.addAll(listAllTasks);
+    listUncomletedTasks = newlist;
+    print(listUncomletedTasks);
+    listUncomletedTasks.removeWhere((element) => element[1] == true);
+    print(listUncomletedTasks);
+
+    notifyListeners();
+  }
+
+
+   
+
+
 
   void createTask(
       String taskTitle, bool completed, int? priority, String date) {
-    listAllTask.add([taskTitle, completed, priority, date]);
+    listAllTasks.add([taskTitle, completed, priority, date]);
     notifyListeners();
   }
 
   void deleteTask(int index) {
-    listAllTask.removeAt(index);
+    listAllTasks.removeAt(index);
     notifyListeners();
   }
 
   bool? checkBox = true;
 
   void changeValue(bool? value, int index) {
-    if (listAllTask[index][1] = !value!) {
-      listAllTask[index][1] = value;
+    if (listAllTasks[index][1] = !value!) {
+      listAllTasks[index][1] = value;
     }
     notifyListeners();
   }
@@ -58,7 +97,7 @@ class ProviderTask extends ChangeNotifier {
 
   void countAllCompletedTasks() {
     int counter = 0;
-    for (List<dynamic> sublist in listAllTask) {
+    for (List<dynamic> sublist in listAllTasks) {
       if (sublist[1] == true) {
         counter++;
       }
