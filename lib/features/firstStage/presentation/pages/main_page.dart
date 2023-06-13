@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:todo_list/features/presentation/pages/task_edit_page.dart';
-import 'package:todo_list/features/presentation/widgets/task_list_widget.dart';
+import 'package:todo_list/features/firstStage/presentation/pages/task_edit_page.dart';
+import 'package:todo_list/features/firstStage/presentation/widgets/task_list_widget.dart';
+
 
 class MainPage extends StatefulWidget {
   const MainPage({

@@ -5,7 +5,7 @@ class ProviderTask extends ChangeNotifier {
   List<List> listAllTask = [];
 
   void createTask(
-      String taskTitle, bool completed, String priority, String date) {
+      String taskTitle, bool completed, int? priority, String date) {
     listAllTask.add([taskTitle, completed, priority, date]);
     notifyListeners();
   }
@@ -44,6 +44,7 @@ class ProviderTask extends ChangeNotifier {
   bool isnewTask = true;
 
   int? priority = 0;
+  
 
   void changePriority(int? value) {
     priority = value;

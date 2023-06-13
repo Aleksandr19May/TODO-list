@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_list/common/colors.dart';
-import 'package:todo_list/features/presentation/provider/provider.dart';
+import 'package:todo_list/features/firstStage/presentation/provider/provider.dart';
+
 
 class TaskEditPage extends StatefulWidget {
   const TaskEditPage({super.key});
@@ -47,7 +48,7 @@ class _TaskEditPageState extends State<TaskEditPage> {
                     ),
                     InkWell(
                       onTap: () {
-                        provider.createTask(_textcontroller.text, false, 'нет',
+                        provider.createTask(_textcontroller.text, false, provider.priority,
                             '${provider.day}');
                         provider.changeSwitcher(false);
                         Navigator.of(context).pop();
@@ -71,26 +72,27 @@ class _TaskEditPageState extends State<TaskEditPage> {
                       Padding(
                         padding: const EdgeInsets.only(
                             left: 16.0, right: 16, top: 23),
-                        child: Container(
-                          color: ThemeData().cardColor,
-                          height: 104,
-                          // margin: EdgeInsets.zero,
-                          // semanticContainer: false,
-                          // shape: const RoundedRectangleBorder(
-                          //   borderRadius:
-                          //       BorderRadius.all(Radius.circular(8.0)),
-                          // ),
-                          // elevation: 4,
-                          child: TextField(
-                            // style: TextStyle(height:5 ),
-                            textInputAction: TextInputAction.done,
-                            decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.all(16),
-                              hintText: 'Что надо сделать...',
-                              border: InputBorder.none,
+                        child: Card(
+                          margin: EdgeInsets.zero,
+                          semanticContainer: false,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0)),
+                          ),
+                          elevation: 4,
+                          child: ConstrainedBox(
+                            constraints: const BoxConstraints(
+                                minHeight: 104, maxHeight: 1000),
+                            child: TextField(
+                              textInputAction: TextInputAction.done,
+                              decoration: const InputDecoration(
+                                contentPadding: EdgeInsets.all(16),
+                                hintText: 'Что надо сделать...',
+                                border: InputBorder.none,
+                              ),
+                              controller: _textcontroller,
+                              maxLines: null,
                             ),
-                            controller: _textcontroller,
-                            maxLines: null,
                           ),
                         ),
                       ),
@@ -105,6 +107,9 @@ class _TaskEditPageState extends State<TaskEditPage> {
                           children: [
                             const Text('Важность'),
                             DropdownButton<int>(
+                                underline: const Divider(
+                                  color: Colors.transparent,
+                                ),
                                 value: provider.priority,
                                 iconSize: 0,
                                 elevation: 8,
@@ -201,20 +206,20 @@ class _TaskEditPageState extends State<TaskEditPage> {
                               absorbing: provider.isnewTask ? true : false,
                               child: InkWell(
                                 onTap: () => {},
-                                child: InkWell(
-                                  onTap: () {},
-                                  child: Text(
-                                    'Удалить',
-                                    style: TextStyle(
-                                        color: provider.isnewTask
-                                            ? AppColorsLightTheme.disable
-                                            : Colors.red),
-                                  ),
+                                child: Text(
+                                  'Удалить',
+                                  style: TextStyle(
+                                      color: provider.isnewTask
+                                          ? AppColorsLightTheme.disable
+                                          : Colors.red),
                                 ),
                               ),
                             ),
                           ],
                         ),
+                      ),
+                      const SizedBox(
+                        height: 30,
                       )
                     ],
                   );
