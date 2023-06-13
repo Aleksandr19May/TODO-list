@@ -7,6 +7,14 @@ class ProviderTask extends ChangeNotifier {
   List<List> temporarylistTasks = [];
   bool showedAllTasks = false;
   int selectedIndex = 0;
+  bool isEdited = false;
+  int index = 0;
+
+  
+  void changeEditor(bool boolevo) {
+    isEdited = boolevo;
+    notifyListeners();
+  }
 
   void changedshow() {
     if (!showedAllTasks) {
@@ -38,11 +46,6 @@ class ProviderTask extends ChangeNotifier {
     notifyListeners();
   }
 
-
-   
-
-
-
   void createTask(
       String taskTitle, bool completed, int? priority, String date) {
     listAllTasks.add([taskTitle, completed, priority, date]);
@@ -51,6 +54,7 @@ class ProviderTask extends ChangeNotifier {
 
   void deleteTask(int index) {
     listAllTasks.removeAt(index);
+
     notifyListeners();
   }
 

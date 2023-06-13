@@ -4,14 +4,17 @@ import 'package:todo_list/common/colors.dart';
 import 'package:todo_list/features/firstStage/presentation/provider/provider.dart';
 
 class TaskEditPage extends StatefulWidget {
-  const TaskEditPage({super.key});
+ final int listIndex;
+   const TaskEditPage({super.key,this.listIndex=0 } );
 
   @override
   State<TaskEditPage> createState() => _TaskEditPageState();
 }
 
 class _TaskEditPageState extends State<TaskEditPage> {
-  final TextEditingController _textcontroller = TextEditingController();
+
+  
+  final TextEditingController _textcontroller = TextEditingController( );
 
   @override
   void dispose() {
@@ -47,13 +50,16 @@ class _TaskEditPageState extends State<TaskEditPage> {
                     ),
                     InkWell(
                       onTap: () {
-                        provider.createTask(_textcontroller.text, false,
-                        provider.priority, provider.switcher ?'${provider.selectedDay}': '');
+                        provider.createTask(
+                            _textcontroller.text,
+                            false,
+                            provider.priority,
+                            provider.switcher ? '${provider.selectedDay}' : '');
                         provider.changeSwitcher(false);
                         provider.changePriority(0);
-                      
-                       provider.getUncompletedTasks();
-                     
+
+                        provider.getUncompletedTasks();
+                        provider.changeEditor(false);
                         Navigator.of(context).pop();
                       },
                       child: const Text(
@@ -93,7 +99,12 @@ class _TaskEditPageState extends State<TaskEditPage> {
                                 hintText: 'Что надо сделать...',
                                 border: InputBorder.none,
                               ),
-                              controller: _textcontroller,
+                              controller:   !provider.isEdited  ? _textcontroller :   TextEditingController(text: provider.showedAllTasks 
+          ? provider.listAllTasks[widget.listIndex][0] ?? ''
+          : provider.listUncomletedTasks[widget.listIndex][0]?? '' ),
+
+
+ 
                               maxLines: null,
                             ),
                           ),

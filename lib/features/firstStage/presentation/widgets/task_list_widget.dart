@@ -1,8 +1,7 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_list/features/firstStage/presentation/pages/task_edit_page.dart';
 import 'package:todo_list/features/firstStage/presentation/provider/provider.dart';
 
 class TaskListWidget extends StatefulWidget {
@@ -67,8 +66,10 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                   if (states.contains(MaterialState.selected)) {
                     return Colors.green;
                   }
-                  final DateTime taskDay = allTask[index][3] == '' ? provider.currentDate :
-                      DateFormat('dd MMMM yyyy', 'ru').parse(allTask[index][3]);
+                  final DateTime taskDay = allTask[index][3] == ''
+                      ? provider.currentDate
+                      : DateFormat('dd MMMM yyyy', 'ru')
+                          .parse(allTask[index][3]);
                   if (taskDay.isBefore(provider.currentDate)) {
                     return Colors.red;
                   } else {
@@ -112,9 +113,22 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                 ),
               ),
               subtitle: Text(allTask[index][3] ?? ""),
-              trailing: Image.asset(
-                'assets/icons/info_outline.png',
-                color: const Color.fromRGBO(0, 0, 0, 0.3),
+              trailing: InkWell(
+                
+                onTap: () {
+                  provider.changeEditor(true);
+                 
+                  Navigator.of(context).push(MaterialPageRoute(
+                    
+                    builder: (context) {
+                    
+          return  TaskEditPage(listIndex: index,);
+        }));
+                },
+                child: Image.asset(
+                  'assets/icons/info_outline.png',
+                  color: const Color.fromRGBO(0, 0, 0, 0.3),
+                ),
               ),
             ),
           ),

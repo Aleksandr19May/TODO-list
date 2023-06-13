@@ -71,7 +71,7 @@ class _SliverAppBarExampleState extends State<SliverAppBarExample> {
                           provider.getUncompletedTasks();
                           
                           }
-                          
+                          print (provider.showedAllTasks);
                           print("все таски ${provider.listAllTasks}");
                           print("невыполненные таски ${provider.listUncomletedTasks}");
                         },
@@ -107,7 +107,7 @@ class _SliverAppBarExampleState extends State<SliverAppBarExample> {
                             child: InkWell(
                                 onTap: () => Navigator.of(context).push(
                                         MaterialPageRoute(builder: (context) {
-                                      return const TaskEditPage();
+                                      return  const TaskEditPage();
                                     })),
                                 child: const Text('Новое')),
                           ),

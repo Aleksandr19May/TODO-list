@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-// import 'package:todo_list/common/themes/dark_theme.dart';
-// import 'package:todo_list/common/themes/light_theme.dart';
+import 'package:todo_list/common/themes/dark_theme.dart';
+import 'package:todo_list/common/themes/light_theme.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
                 ),
           ),
         ],
-        child: const MaterialApp(
+        child:  MaterialApp(
           localizationsDelegates: [
          GlobalMaterialLocalizations.delegate
          , GlobalWidgetsLocalizations.delegate,
@@ -50,8 +50,8 @@ class MyApp extends StatelessWidget {
          Locale('ru'),
         
        ],
-          // darkTheme: darkTheme(),
-          // theme: lightTheme(),
+          darkTheme: darkTheme(),
+          theme: lightTheme(),
           home: SliverAppBarExample(),
         ));
   }
