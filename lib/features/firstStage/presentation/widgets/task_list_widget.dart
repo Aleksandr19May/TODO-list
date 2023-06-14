@@ -26,11 +26,17 @@ class _TaskListWidgetState extends State<TaskListWidget> {
       itemBuilder: (context, index) {
         return ClipRect(
           child: Dismissible(
-            confirmDismiss: (direction) =>
-                direction == DismissDirection.startToEnd
-                    ? Future.value(false)
-                    : Future.value(true),
-            onUpdate: (details) {},
+            confirmDismiss: (direction) {
+              if (direction == DismissDirection.startToEnd) {
+                provider.changeValue(true, index);
+                allTask[index][1] = true;
+                provider.countAllCompletedTasks();
+                provider.getUncompletedTasks();
+                return Future.value(false);
+              } else {
+                return Future.value(true);
+              }
+            },
             resizeDuration: const Duration(seconds: 1),
             key: ValueKey(allTask[index]),
             direction: DismissDirection.horizontal,
@@ -86,18 +92,16 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                 onChanged: (bool? value) {
                   provider.changeValue(value, index);
                   allTask[index][1] = value;
-
                   provider.countAllCompletedTasks();
                   provider.getUncompletedTasks();
-                  print("все таски ${provider.listAllTasks}");
-                  print("выполненные таски ${provider.listComletedTasks}");
-                  print("невыполненные таски ${provider.listUncomletedTasks}");
                 },
               ),
               enabled: false,
               title: Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: RichText(
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 3,
                   text: TextSpan(
                     children: [
                       WidgetSpan(
@@ -109,13 +113,15 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                                 ? Image.asset('assets/icons/arrow_down.png')
                                 : const Text(''),
                       ),
+                     
                       TextSpan(
                         text: " ${allTask[index][0]}",
-                        style: TextStyle(
+                        
+                        style: TextStyle( 
                             decoration: allTask[index][1]
                                 ? TextDecoration.lineThrough
-                                : TextDecoration.none,
-                            color: Colors.black),
+                                : TextDecoration.none, 
+                            color: Colors.black , ),
                       ),
                     ],
                   ),

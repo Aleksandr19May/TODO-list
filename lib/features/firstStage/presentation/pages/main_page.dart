@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+
 import 'package:todo_list/features/firstStage/presentation/pages/task_edit_page.dart';
-import 'package:todo_list/features/firstStage/presentation/provider/provider.dart';
+
+import 'package:todo_list/features/firstStage/presentation/widgets/sliver.dart';
+
 import 'package:todo_list/features/firstStage/presentation/widgets/task_list_widget.dart';
 
 class MainPage extends StatefulWidget {
@@ -32,54 +34,18 @@ class SliverAppBarClass extends StatefulWidget {
   State<SliverAppBarClass> createState() => _SliverAppBarClassState();
 }
 
-late DateTime selectedDate;
-
 class _SliverAppBarClassState extends State<SliverAppBarClass> {
   @override
   Widget build(BuildContext context) {
-    ProviderTask provider = Provider.of<ProviderTask>(context);
     return Scaffold(
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            SliverAppBar(
+            SliverPersistentHeader(
               pinned: true,
-              expandedHeight: 144,
-              flexibleSpace: FlexibleSpaceBar(
-                titlePadding: const EdgeInsets.only(left: 80),
-                title: Text(
-                  'Мои дела',
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: 20,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 80, right: 25),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Выполнено - ${provider.listComletedTasks.length}'),
-                      InkWell(
-                        onTap: () {
-                          provider.changedshow();
-                          if (!provider.showedAllTasks) {
-                            provider.getUncompletedTasks();
-                          }
-                         
-                         
-                        },
-                        child: Image.asset(
-                          provider.showedAllTasks
-                              ? 'assets/icons/visibility_off.png'
-                              : 'assets/icons/visibility.png',
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+              delegate: CustomSliverPersistentHeaderDelegate(
+                openHeight: 164,
+                closedHeight: 84,
               ),
             ),
             SliverList(
@@ -87,7 +53,7 @@ class _SliverAppBarClassState extends State<SliverAppBarClass> {
                 (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.only(
-                        left: 8, right: 8, top: 18, bottom: 30),
+                        left: 8, right: 8, bottom: 30),
                     child: Card(
                       semanticContainer: false,
                       shape: const RoundedRectangleBorder(
@@ -103,8 +69,7 @@ class _SliverAppBarClassState extends State<SliverAppBarClass> {
                             padding: const EdgeInsets.only(
                                 left: 72, bottom: 14, top: 14),
                             child: InkWell(
-                                onTap: () => 
-                                Navigator.of(context).push(
+                                onTap: () => Navigator.of(context).push(
                                         MaterialPageRoute(builder: (context) {
                                       return const TaskEditPage();
                                     })),
