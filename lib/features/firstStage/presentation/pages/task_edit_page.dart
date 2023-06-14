@@ -4,17 +4,40 @@ import 'package:todo_list/common/colors.dart';
 import 'package:todo_list/features/firstStage/presentation/provider/provider.dart';
 
 class TaskEditPage extends StatefulWidget {
- final int listIndex;
-   const TaskEditPage({super.key,this.listIndex=0 } );
+  final int index;
+  final bool edited;
+  final bool showedalltasks;
+  final String? textTitlefromAllTask;
+  final String? textTitlefromUncompletedTask;
+
+  const TaskEditPage(
+      {super.key,
+      this.edited = false,
+      this.showedalltasks = true,
+      this.textTitlefromAllTask,
+      this.textTitlefromUncompletedTask,
+      this.index = 0});
 
   @override
   State<TaskEditPage> createState() => _TaskEditPageState();
 }
 
 class _TaskEditPageState extends State<TaskEditPage> {
+  TextEditingController _textcontroller = TextEditingController();
 
-  
-  final TextEditingController _textcontroller = TextEditingController( );
+  @override
+  void initState() {
+    super.initState();
+    if (widget.edited) {
+      String? textTask = '';
+      if (widget.showedalltasks) {
+        textTask = widget.textTitlefromAllTask;
+      } else {
+        textTask = widget.textTitlefromUncompletedTask;
+      }
+      _textcontroller = TextEditingController(text: textTask);
+    }
+  }
 
   @override
   void dispose() {
@@ -27,6 +50,7 @@ class _TaskEditPageState extends State<TaskEditPage> {
   Widget build(BuildContext context) {
     ProviderTask provider = Provider.of<ProviderTask>(context);
     double widthScreen = MediaQuery.of(context).size.width;
+  
 
     return Scaffold(
       body: SafeArea(
@@ -50,16 +74,26 @@ class _TaskEditPageState extends State<TaskEditPage> {
                     ),
                     InkWell(
                       onTap: () {
-                        provider.createTask(
-                            _textcontroller.text,
-                            false,
-                            provider.priority,
-                            provider.switcher ? '${provider.selectedDay}' : '');
-                        provider.changeSwitcher(false);
-                        provider.changePriority(0);
+                        if (provider.isEdited) {
+                          provider.editTask(
+                              widget.index,
+                              _textcontroller.text,
+                              false,
+                              provider.priority,
+                              provider.switcher
+                                  ? '${provider.selectedDay}'
+                                  : '');
+                        } else {
+                          provider.createTask(
+                              _textcontroller.text,
+                              false,
+                              provider.priority,
+                              provider.switcher
+                                  ? '${provider.selectedDay}'
+                                  : '');
+                        }
 
-                        provider.getUncompletedTasks();
-                        provider.changeEditor(false);
+                        afterCreatingOrDeleting(provider);
                         Navigator.of(context).pop();
                       },
                       child: const Text(
@@ -99,12 +133,7 @@ class _TaskEditPageState extends State<TaskEditPage> {
                                 hintText: 'Что надо сделать...',
                                 border: InputBorder.none,
                               ),
-                              controller:   !provider.isEdited  ? _textcontroller :   TextEditingController(text: provider.showedAllTasks 
-          ? provider.listAllTasks[widget.listIndex][0] ?? ''
-          : provider.listUncomletedTasks[widget.listIndex][0]?? '' ),
-
-
- 
+                              controller: _textcontroller,
                               maxLines: null,
                             ),
                           ),
@@ -202,12 +231,12 @@ class _TaskEditPageState extends State<TaskEditPage> {
                         child: Row(
                           children: [
                             AbsorbPointer(
-                              absorbing: provider.isnewTask ? true : false,
+                              absorbing: !provider.isEdited ? true : false,
                               child: InkWell(
-                                onTap: () => {},
+                                onTap: () => provider.deleteTaskfromlistAllTasks(widget.index),
                                 child: Image.asset(
                                   'assets/icons/delete.png',
-                                  color: provider.isnewTask
+                                  color: !provider.isEdited
                                       ? AppColorsLightTheme.disable
                                       : Colors.red,
                                 ),
@@ -217,13 +246,17 @@ class _TaskEditPageState extends State<TaskEditPage> {
                               width: 10,
                             ),
                             AbsorbPointer(
-                              absorbing: provider.isnewTask ? true : false,
+                              absorbing: !provider.isEdited ? true : false,
                               child: InkWell(
-                                onTap: () => {},
+                                onTap: () {
+                                  provider.deleteTaskfromlistAllTasks(widget.index);
+                                 afterCreatingOrDeleting(provider);
+                                 Navigator.of(context).pop();
+                                } ,
                                 child: Text(
                                   'Удалить',
                                   style: TextStyle(
-                                      color: provider.isnewTask
+                                      color: !provider.isEdited
                                           ? AppColorsLightTheme.disable
                                           : Colors.red),
                                 ),
@@ -245,6 +278,14 @@ class _TaskEditPageState extends State<TaskEditPage> {
         ),
       ),
     );
+  }
+
+  void afterCreatingOrDeleting(ProviderTask provider) {
+    provider.changeSwitcher(false);
+    provider.changePriority(0);
+    provider.countAllCompletedTasks();
+    provider.getUncompletedTasks();
+    provider.changeEditor(false);
   }
 
   Future<void> selectTaskDate(

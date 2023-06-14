@@ -25,20 +25,19 @@ class _MainPageState extends State<MainPage> {
   }
 }
 
-class SliverAppBarExample extends StatefulWidget {
-  const SliverAppBarExample({super.key});
+class SliverAppBarClass extends StatefulWidget {
+  const SliverAppBarClass({super.key});
 
   @override
-  State<SliverAppBarExample> createState() => _SliverAppBarExampleState();
+  State<SliverAppBarClass> createState() => _SliverAppBarClassState();
 }
 
 late DateTime selectedDate;
 
-class _SliverAppBarExampleState extends State<SliverAppBarExample> {
-
+class _SliverAppBarClassState extends State<SliverAppBarClass> {
   @override
   Widget build(BuildContext context) {
-      ProviderTask provider = Provider.of<ProviderTask>(context);
+    ProviderTask provider = Provider.of<ProviderTask>(context);
     return Scaffold(
       body: SafeArea(
         child: CustomScrollView(
@@ -62,21 +61,20 @@ class _SliverAppBarExampleState extends State<SliverAppBarExample> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                       Text('Выполнено - ${provider.completedTasks}'),
+                      Text('Выполнено - ${provider.listComletedTasks.length}'),
                       InkWell(
                         onTap: () {
                           provider.changedshow();
                           if (!provider.showedAllTasks) {
-                           
-                          provider.getUncompletedTasks();
-                          
+                            provider.getUncompletedTasks();
                           }
-                          print (provider.showedAllTasks);
-                          print("все таски ${provider.listAllTasks}");
-                          print("невыполненные таски ${provider.listUncomletedTasks}");
+                         
+                         
                         },
-                        child: Image.asset( provider.showedAllTasks ? 'assets/icons/visibility_off.png' :
-                          'assets/icons/visibility.png',
+                        child: Image.asset(
+                          provider.showedAllTasks
+                              ? 'assets/icons/visibility_off.png'
+                              : 'assets/icons/visibility.png',
                         ),
                       ),
                     ],
@@ -105,9 +103,10 @@ class _SliverAppBarExampleState extends State<SliverAppBarExample> {
                             padding: const EdgeInsets.only(
                                 left: 72, bottom: 14, top: 14),
                             child: InkWell(
-                                onTap: () => Navigator.of(context).push(
+                                onTap: () => 
+                                Navigator.of(context).push(
                                         MaterialPageRoute(builder: (context) {
-                                      return  const TaskEditPage();
+                                      return const TaskEditPage();
                                     })),
                                 child: const Text('Новое')),
                           ),
@@ -122,13 +121,17 @@ class _SliverAppBarExampleState extends State<SliverAppBarExample> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () =>
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-          return const TaskEditPage();
-        })),
-        child: const Icon(Icons.add),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 32),
+        child: FloatingActionButton(
+          onPressed: () =>
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+            return const TaskEditPage();
+          })),
+          child: const Icon(Icons.add),
+        ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }
 }

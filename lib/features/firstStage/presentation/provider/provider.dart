@@ -4,18 +4,51 @@ import 'package:intl/intl.dart';
 class ProviderTask extends ChangeNotifier {
   List<List> listAllTasks = [];
   List<List> listUncomletedTasks = [];
-  List<List> temporarylistTasks = [];
+  List<List> listComletedTasks = [];
+
   bool showedAllTasks = false;
   int selectedIndex = 0;
   bool isEdited = false;
-  int index = 0;
 
-  
+  /// Для внесения изменений в существующую таску
+  void editTask(
+      int index, String taskTitle, bool completed, int? priority, String date) {
+    listAllTasks[index] = [taskTitle, completed, priority, date];
+
+    notifyListeners();
+  }
+
+  /// Получаем лист выполненых задач
+  void countAllCompletedTasks() {
+    listComletedTasks.clear();
+    List<List<dynamic>> newlist = [];
+    for (List<dynamic> sublist in listAllTasks) {
+      if (sublist[1] == true) {
+        newlist.add(sublist);
+      }
+    }
+    listComletedTasks.addAll(newlist);
+
+    notifyListeners();
+  }
+
+  /// Получаем лист невыполненых задач
+  void getUncompletedTasks() {
+    listUncomletedTasks.clear();
+    List<List<dynamic>> newlist = [];
+    newlist.addAll(listAllTasks);
+    newlist.removeWhere((element) => listComletedTasks.contains(element));
+    listUncomletedTasks.addAll(newlist);
+    notifyListeners();
+  }
+
+  /// Флаг для понимания, задача редактируется или нет
   void changeEditor(bool boolevo) {
     isEdited = boolevo;
     notifyListeners();
   }
 
+  /// Используется для изменения видимости задач
   void changedshow() {
     if (!showedAllTasks) {
       showedAllTasks = true;
@@ -25,41 +58,26 @@ class ProviderTask extends ChangeNotifier {
     notifyListeners();
   }
 
-  // void getTemporarylist() {
-  //   temporarylistTasks.clear();
-  //   temporarylistTasks.addAll(listAllTasks);
-
-  //   temporarylistTasks.removeWhere((element) => element[1] == true);
-
-  //   notifyListeners();
-  // }
-
-  void getUncompletedTasks() {
-    List<List<dynamic>> newlist = [];
-    print(listUncomletedTasks);
-    newlist.addAll(listAllTasks);
-    listUncomletedTasks = newlist;
-    print(listUncomletedTasks);
-    listUncomletedTasks.removeWhere((element) => element[1] == true);
-    print(listUncomletedTasks);
-
-    notifyListeners();
-  }
-
+  /// Используется для создания таска
   void createTask(
       String taskTitle, bool completed, int? priority, String date) {
     listAllTasks.add([taskTitle, completed, priority, date]);
     notifyListeners();
   }
 
-  void deleteTask(int index) {
-    listAllTasks.removeAt(index);
+  void deleteTaskfromlistUncompletedTasks(int index) {
+    listUncomletedTasks.removeAt(index);
+    notifyListeners();
+  }
 
+  void deleteTaskfromlistAllTasks(int index) {
+    listAllTasks.removeAt(index);
     notifyListeners();
   }
 
   bool? checkBox = true;
 
+  /// Используется для изменения чекбокса
   void changeValue(bool? value, int index) {
     if (listAllTasks[index][1] = !value!) {
       listAllTasks[index][1] = value;
@@ -69,6 +87,7 @@ class ProviderTask extends ChangeNotifier {
 
   bool switcher = false;
 
+  /// Используется для изменения свитчера выбора даты
   void changeSwitcher(bool value) {
     switcher = value;
     notifyListeners();
@@ -82,32 +101,24 @@ class ProviderTask extends ChangeNotifier {
 
   String? selectedDay = DateFormat('dd MMMM yyyy', 'ru').format(DateTime.now());
 
+  /// Используется для изменения даты таска
   void changeDate(DateTime? date) {
     selectedDate = date;
+    
     selectedDay = DateFormat('dd MMMM yyyy', 'ru').format(selectedDate!);
     notifyListeners();
   }
 
-  bool isnewTask = true;
+  
 
   int? priority = 0;
 
+  
+
+  /// Используется для изменения приоритета таска
   void changePriority(int? value) {
-    priority = value;
-    notifyListeners();
-  }
-
-  int completedTasks = 0;
-
-  void countAllCompletedTasks() {
-    int counter = 0;
-    for (List<dynamic> sublist in listAllTasks) {
-      if (sublist[1] == true) {
-        counter++;
-      }
-    }
-    completedTasks = counter;
-
+   
+priority = value;
     notifyListeners();
   }
 }

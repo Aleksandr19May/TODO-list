@@ -36,7 +36,13 @@ class _TaskListWidgetState extends State<TaskListWidget> {
             direction: DismissDirection.horizontal,
             onDismissed: (direction) {
               if (direction == DismissDirection.endToStart) {
-                provider.deleteTask(index);
+                if (provider.showedAllTasks) {
+                  provider.deleteTaskfromlistAllTasks(index);
+                } else {
+                  provider.deleteTaskfromlistAllTasks(index);
+                  provider.deleteTaskfromlistUncompletedTasks(index);
+                }
+
                 provider.countAllCompletedTasks();
               }
             },
@@ -80,9 +86,12 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                 onChanged: (bool? value) {
                   provider.changeValue(value, index);
                   allTask[index][1] = value;
-                  provider.countAllCompletedTasks();
 
+                  provider.countAllCompletedTasks();
                   provider.getUncompletedTasks();
+                  print("все таски ${provider.listAllTasks}");
+                  print("выполненные таски ${provider.listComletedTasks}");
+                  print("невыполненные таски ${provider.listUncomletedTasks}");
                 },
               ),
               enabled: false,
@@ -114,16 +123,34 @@ class _TaskListWidgetState extends State<TaskListWidget> {
               ),
               subtitle: Text(allTask[index][3] ?? ""),
               trailing: InkWell(
-                
                 onTap: () {
                   provider.changeEditor(true);
-                 
-                  Navigator.of(context).push(MaterialPageRoute(
-                    
-                    builder: (context) {
-                    
-          return  TaskEditPage(listIndex: index,);
-        }));
+                  provider.changePriority(provider.listAllTasks[index][2]);
+                  if (provider.listAllTasks[index][3] != '') {
+                    provider.changeSwitcher(true);
+                  }
+
+                  provider.selectedDay = provider.listAllTasks[index][3];
+
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) {
+                    final bool edited = provider.isEdited;
+                    final bool showedalltasks = provider.showedAllTasks;
+                    final String? textTitlefromAllTask =
+                        provider.listAllTasks[index][0];
+                    final String? textTitlefromUncompletedTask =
+                        provider.listUncomletedTasks.isNotEmpty
+                            ? provider.listUncomletedTasks[index][0] ?? ''
+                            : null;
+                    return TaskEditPage(
+                      index: index,
+                      edited: edited,
+                      showedalltasks: showedalltasks,
+                      textTitlefromAllTask: textTitlefromAllTask,
+                      textTitlefromUncompletedTask:
+                          textTitlefromUncompletedTask,
+                    );
+                  }));
                 },
                 child: Image.asset(
                   'assets/icons/info_outline.png',

@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:todo_list/common/themes/dark_theme.dart';
 import 'package:todo_list/common/themes/light_theme.dart';
 
+// ignore: depend_on_referenced_packages
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:todo_list/features/firstStage/presentation/bloc/task_list_bloc.dart';
@@ -41,18 +42,18 @@ class MyApp extends StatelessWidget {
           ),
         ],
         child:  MaterialApp(
-          localizationsDelegates: [
+          localizationsDelegates: const [
          GlobalMaterialLocalizations.delegate
          , GlobalWidgetsLocalizations.delegate,
            GlobalCupertinoLocalizations.delegate,
        ],
-       supportedLocales: [
+       supportedLocales: const [
          Locale('ru'),
         
        ],
           darkTheme: darkTheme(),
           theme: lightTheme(),
-          home: SliverAppBarExample(),
+          home: const SliverAppBarClass(),
         ));
   }
 }
