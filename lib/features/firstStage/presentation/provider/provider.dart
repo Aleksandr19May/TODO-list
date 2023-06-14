@@ -21,13 +21,12 @@ class ProviderTask extends ChangeNotifier {
   /// Получаем лист выполненых задач
   void countAllCompletedTasks() {
     listComletedTasks.clear();
-    List<List<dynamic>> newlist = [];
+
     for (List<dynamic> sublist in listAllTasks) {
       if (sublist[1] == true) {
-        newlist.add(sublist);
+        listComletedTasks.add(sublist);
       }
     }
-    listComletedTasks.addAll(newlist);
 
     notifyListeners();
   }
@@ -37,7 +36,11 @@ class ProviderTask extends ChangeNotifier {
     listUncomletedTasks.clear();
     List<List<dynamic>> newlist = [];
     newlist.addAll(listAllTasks);
-    newlist.removeWhere((element) => listComletedTasks.contains(element));
+
+    newlist.removeWhere((element) {
+      return element[1] == true;
+    });
+
     listUncomletedTasks.addAll(newlist);
     notifyListeners();
   }
@@ -66,6 +69,7 @@ class ProviderTask extends ChangeNotifier {
   }
 
   void deleteTaskfromlistUncompletedTasks(int index) {
+ 
     listUncomletedTasks.removeAt(index);
     notifyListeners();
   }
@@ -74,8 +78,6 @@ class ProviderTask extends ChangeNotifier {
     listAllTasks.removeAt(index);
     notifyListeners();
   }
-
-  bool? checkBox = true;
 
   /// Используется для изменения чекбокса
   void changeValue(bool? value, int index) {
@@ -104,21 +106,16 @@ class ProviderTask extends ChangeNotifier {
   /// Используется для изменения даты таска
   void changeDate(DateTime? date) {
     selectedDate = date;
-    
+
     selectedDay = DateFormat('dd MMMM yyyy', 'ru').format(selectedDate!);
     notifyListeners();
   }
 
-  
-
   int? priority = 0;
-
-  
 
   /// Используется для изменения приоритета таска
   void changePriority(int? value) {
-   
-priority = value;
+    priority = value;
     notifyListeners();
   }
 }

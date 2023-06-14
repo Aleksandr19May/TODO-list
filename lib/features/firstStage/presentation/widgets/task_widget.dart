@@ -38,7 +38,6 @@ class TaskWidget extends StatelessWidget {
           provider.changeValue(value, index);
           allTask[index][1] = value;
           provider.countAllCompletedTasks();
-          provider.getUncompletedTasks();
         },
       ),
       enabled: false,

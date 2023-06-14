@@ -30,7 +30,7 @@ class _TaskListWidgetState extends State<TaskListWidget> {
             resizeDuration: const Duration(seconds: 1),
             key: ValueKey(allTask[index]),
             direction: DismissDirection.horizontal,
-            onDismissed: (direction) => deleteTask(direction, provider, index),
+            onDismissed: (direction) => deleteTask(direction, provider, index, allTask),
             secondaryBackground: Container(
               color: Colors.red,
               alignment: Alignment.centerRight,
@@ -60,18 +60,19 @@ class _TaskListWidgetState extends State<TaskListWidget> {
     );
   }
 
-  void deleteTask(
-      DismissDirection direction, ProviderTask provider, int index) {
+  void deleteTask(DismissDirection direction, ProviderTask provider, int index,
+      List<dynamic> allTask) {
     if (direction == DismissDirection.endToStart) {
       if (provider.showedAllTasks) {
         provider.deleteTaskfromlistAllTasks(index);
       } else {
         provider.deleteTaskfromlistAllTasks(index);
         provider.deleteTaskfromlistUncompletedTasks(index);
+       
       }
-
-      provider.countAllCompletedTasks();
-    }
+    } 
+     provider.countAllCompletedTasks();
+    
   }
 
   Future<bool?> markTaskAsCompleted(DismissDirection direction,
@@ -80,7 +81,7 @@ class _TaskListWidgetState extends State<TaskListWidget> {
       provider.changeValue(true, index);
       allTask[index][1] = true;
       provider.countAllCompletedTasks();
-      provider.getUncompletedTasks();
+
       return Future.value(false);
     } else {
       return Future.value(true);
