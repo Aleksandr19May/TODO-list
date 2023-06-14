@@ -2,16 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:todo_list/common/colors.dart';
 
 ThemeData lightTheme() => ThemeData(
-
       cardColor: AppColorsLightTheme.backSecondary,
       appBarTheme: const AppBarTheme(color: AppColorsLightTheme.backPrimary),
       primaryColor: AppColorsLightTheme.primary,
       fontFamily: 'Roboto',
       textTheme: const TextTheme(
           titleLarge: TextStyle(
-              fontWeight: FontWeight.w500, fontSize: 32, height: 38/32),
+              fontWeight: FontWeight.w500, fontSize: 32, height: 38 / 32),
           titleMedium: TextStyle(
-            
             fontSize: 20,
             height: 1,
             fontWeight: FontWeight.w500,

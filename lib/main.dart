@@ -11,20 +11,19 @@ import 'package:todo_list/features/firstStage/presentation/bloc/task_list_bloc.d
 import 'package:todo_list/features/firstStage/presentation/pages/main_page.dart';
 import 'package:todo_list/features/firstStage/presentation/provider/provider.dart';
 
-
-
 void main() {
   initializeDateFormatting('ru', null).then((_) {
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider<ProviderTask>(
-          create: (context) => ProviderTask(),
-        ),
-      ],
-      child: const MyApp(),
-    ),
-  );});
+    runApp(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider<ProviderTask>(
+            create: (context) => ProviderTask(),
+          ),
+        ],
+        child: const MyApp(),
+      ),
+    );
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -41,16 +40,15 @@ class MyApp extends StatelessWidget {
                 ),
           ),
         ],
-        child:  MaterialApp(
+        child: MaterialApp(
           localizationsDelegates: const [
-         GlobalMaterialLocalizations.delegate
-         , GlobalWidgetsLocalizations.delegate,
-           GlobalCupertinoLocalizations.delegate,
-       ],
-       supportedLocales: const [
-         Locale('ru'),
-        
-       ],
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('ru'),
+          ],
           darkTheme: darkTheme(),
           theme: lightTheme(),
           home: const SliverAppBarClass(),

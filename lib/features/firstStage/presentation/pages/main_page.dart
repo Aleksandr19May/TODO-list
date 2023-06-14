@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:todo_list/features/firstStage/presentation/pages/task_edit_page.dart';
 
-import 'package:todo_list/features/firstStage/presentation/widgets/sliver.dart';
+import 'package:todo_list/features/firstStage/presentation/widgets/sliver_delegate.dart';
 
 import 'package:todo_list/features/firstStage/presentation/widgets/task_list_widget.dart';
 

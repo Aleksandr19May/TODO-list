@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_list/common/colors.dart';
 import 'package:todo_list/features/firstStage/presentation/provider/provider.dart';
+import 'package:todo_list/features/firstStage/presentation/widgets/dropdown_button_widget.dart';
 
 class TaskEditPage extends StatefulWidget {
   final int index;
@@ -149,35 +150,7 @@ class _TaskEditPageState extends State<TaskEditPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text('Важность'),
-                            DropdownButton<int>(
-                                underline: const Divider(
-                                  color: Colors.transparent,
-                                ),
-                                value: provider.priority,
-                                iconSize: 0,
-                                elevation: 8,
-                                alignment: Alignment.topLeft,
-                                onChanged: (value) {
-                                  provider.changePriority(value);
-                                },
-                                items: const [
-                                  DropdownMenuItem(
-                                    value: 0,
-                                    child: Text('Нет'),
-                                  ),
-                                  DropdownMenuItem(
-                                    value: 1,
-                                    child: Text('Низкий'),
-                                  ),
-                                  DropdownMenuItem(
-                                    value: 2,
-                                    child: Text(
-                                      '!! Высокий',
-                                      style: TextStyle(
-                                          color: AppColorsLightTheme.red),
-                                    ),
-                                  ),
-                                ]),
+                            DropButtonWidget(provider: provider),
                           ],
                         )),
                       ),
@@ -301,3 +274,4 @@ class _TaskEditPageState extends State<TaskEditPage> {
     });
   }
 }
+
