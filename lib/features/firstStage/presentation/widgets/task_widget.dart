@@ -28,9 +28,7 @@ class TaskWidget extends StatelessWidget {
           if (states.contains(MaterialState.selected)) {
             return Colors.green;
           }
-          // final DateTime taskDay = allTask[index][3] == ''
-          //     ? provider.currentDate
-          //     : DateFormat('dd MMMM yyyy', 'ru').parse(allTask[index][3]);
+
           if (allTask[index][2] == 2) {
             return Colors.red;
           } else {
