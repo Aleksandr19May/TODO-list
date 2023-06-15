@@ -19,10 +19,7 @@ class TaskWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-  titleAlignment: ListTileTitleAlignment.top,
-
-     
-  
+      titleAlignment: ListTileTitleAlignment.top,
       horizontalTitleGap: 0,
       leading: Checkbox(
         checkColor: Colors.white,
@@ -48,13 +45,11 @@ class TaskWidget extends StatelessWidget {
         },
       ),
       enabled: false,
-      
       title: Baseline(
         baselineType: TextBaseline.alphabetic,
-        baseline: 30,
+        baseline: 25,
         child: RichText(
           overflow: TextOverflow.ellipsis,
-           
           maxLines: 3,
           text: TextSpan(
             children: [
@@ -70,14 +65,13 @@ class TaskWidget extends StatelessWidget {
               TextSpan(
                 text: " ${allTask[index][0]}",
                 style: TextStyle(
-                 
                   fontWeight: FontWeight.w400,
                   fontSize: AppTextSizes.body,
                   height: AppHeights.body,
                   decoration: allTask[index][1]
                       ? TextDecoration.lineThrough
                       : TextDecoration.none,
-                  color: AppColorsLightTheme.primary,
+                  color:allTask[index][1] ? AppColorsLightTheme.tertiary : AppColorsLightTheme.primary,
                 ),
               ),
             ],
@@ -86,7 +80,7 @@ class TaskWidget extends StatelessWidget {
       ),
       subtitle: Text(allTask[index][3] ?? ""),
       trailing: Padding(
-        padding: EdgeInsets.only(top: 14),
+        padding: const EdgeInsets.only(top: 14),
         child: InkWell(
           onTap: () {
             provider.changeEditor(true);
@@ -94,7 +88,7 @@ class TaskWidget extends StatelessWidget {
             if (provider.listAllTasks[index][3] != '') {
               provider.changeSwitcher(true);
             }
-        
+
             provider.selectedDay = provider.listAllTasks[index][3];
             Navigate(context);
           },

@@ -14,7 +14,7 @@ class DropButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle style =  TextStyle(fontSize: AppTextSizes.body,height: AppHeights.body, color: AppColorsLightTheme.primary);
+    TextStyle style =  const TextStyle(fontSize: AppTextSizes.body,height: AppHeights.body, color: AppColorsLightTheme.primary);
     return DropdownButton<int>(
     
         underline: const Divider(
@@ -34,14 +34,14 @@ class DropButtonWidget extends StatelessWidget {
           ),
           DropdownMenuItem(
             value: 1,
-            child: Text('Низкий', ),
+            child: Text('Низкий',style: style,),
           ),
-          DropdownMenuItem(
+          const DropdownMenuItem(
             value: 2,
             child: Text(
               '!! Высокий',
               style: TextStyle(
-                  color: AppColorsLightTheme.red),
+                  color: AppColorsLightTheme.red,fontSize:AppTextSizes.body, height:AppHeights.body  ),
             ),
           ),
         ]);

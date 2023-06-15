@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:todo_list/common/colors.dart';
+import 'package:todo_list/common/fonts_size.dart';
 
 import 'package:todo_list/features/firstStage/presentation/pages/task_edit_page.dart';
 
@@ -52,8 +54,8 @@ class _SliverAppBarClassState extends State<SliverAppBarClass> {
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
                   return Padding(
-                    padding: const EdgeInsets.only(
-                        left: 8, right: 8, bottom: 30),
+                    padding:
+                        const EdgeInsets.only(left: 8, right: 8, bottom: 30),
                     child: Card(
                       semanticContainer: false,
                       shape: const RoundedRectangleBorder(
@@ -73,7 +75,13 @@ class _SliverAppBarClassState extends State<SliverAppBarClass> {
                                         MaterialPageRoute(builder: (context) {
                                       return const TaskEditPage();
                                     })),
-                                child: const Text('Новое')),
+                                child: const Text(
+                                  'Новое',
+                                  style: TextStyle(
+                                      fontSize: AppTextSizes.button,
+                                      height: AppHeights.body,
+                                      color: AppColorsLightTheme.tertiary),
+                                )),
                           ),
                         ],
                       ),

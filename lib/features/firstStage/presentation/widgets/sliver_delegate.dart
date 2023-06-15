@@ -32,7 +32,11 @@ class CustomSliverPersistentHeaderDelegate
                     left: titlePaddingleft(shrinkOffset)),
                 child: Text(
                   "Мои дела",
-                  style: TextStyle(fontSize: titleFontSize(shrinkOffset)),
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    height: AppHeights.largeTitle,
+                    color: AppColorsLightTheme.primary,
+                    fontSize: titleFontSize(shrinkOffset)),
                 ),
               ),
               Align(

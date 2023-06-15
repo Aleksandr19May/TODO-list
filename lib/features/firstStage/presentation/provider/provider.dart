@@ -117,4 +117,11 @@ class ProviderTask extends ChangeNotifier {
     priority = value;
     notifyListeners();
   }
+
+  bool cheking = false;
+
+  void checkChanges(boolevo) {
+    cheking = boolevo;
+    notifyListeners();
+  }
 }

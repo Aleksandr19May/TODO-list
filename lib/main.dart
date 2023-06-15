@@ -38,6 +38,7 @@ class MyApp extends StatelessWidget {
           ),
         ],
         child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
@@ -48,11 +49,11 @@ class MyApp extends StatelessWidget {
           ],
           theme: ThemeData(
             textTheme: const TextTheme(
-              // titleLarge: TextStyle(fontSize: 32,height: 38/32),
-              // titleMedium: TextStyle(fontSize: 20,height: 32/20),
-              // labelLarge: TextStyle(fontSize: 14,height: 24/14),
-              // bodyMedium: TextStyle(fontSize: 16,height: 20/16, fontWeight: FontWeight.w400),
-              // titleSmall: TextStyle(fontSize: 14,height: 20/14),
+              titleLarge: TextStyle(fontSize: 32,height: 38/32),
+              titleMedium: TextStyle(fontSize: 20,height: 32/20),
+              labelLarge: TextStyle(fontSize: 14,height: 24/14),
+              bodyMedium: TextStyle(fontSize: 14,height: 20/16, fontWeight: FontWeight.w400),
+              titleSmall: TextStyle(fontSize: 14,height: 20/14),
              
              
             ),
