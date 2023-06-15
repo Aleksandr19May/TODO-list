@@ -12,3 +12,9 @@
 
 
 # Скриншоты и скринкаст
+![Screenshot_1686841369](https://github.com/Aleksandr19May/TODO-list/assets/116716020/23ab371f-fd33-4222-8241-d4aba2858961)
+![Screenshot_1686841376](https://github.com/Aleksandr19May/TODO-list/assets/116716020/6f078c6b-ac51-4011-b696-17740fa6321e)
+![Screenshot_1686841381](https://github.com/Aleksandr19May/TODO-list/assets/116716020/b5b15b0f-765f-406e-bd87-045b6583337e)
+![Screenshot_1686841427](https://github.com/Aleksandr19May/TODO-list/assets/116716020/63732b4f-0a74-428b-9cf3-7ba06e879364)
+![Screenshot_1686841441](https://github.com/Aleksandr19May/TODO-list/assets/116716020/02ce5b4a-7c8c-4d72-9465-78742b7da92e)
+![video](https://github.com/Aleksandr19May/TODO-list/assets/116716020/8ea9e52d-f242-4563-9dd4-d6809484a2ea)
