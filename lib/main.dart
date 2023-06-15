@@ -48,14 +48,14 @@ class MyApp extends StatelessWidget {
             Locale('ru'),
           ],
           theme: ThemeData(
+            
             textTheme: const TextTheme(
-              titleLarge: TextStyle(fontSize: 32,height: 38/32),
-              titleMedium: TextStyle(fontSize: 20,height: 32/20),
-              labelLarge: TextStyle(fontSize: 14,height: 24/14),
-              bodyMedium: TextStyle(fontSize: 14,height: 20/16, fontWeight: FontWeight.w400),
-              titleSmall: TextStyle(fontSize: 14,height: 20/14),
-             
-             
+              titleLarge: TextStyle(fontSize: 32, height: 38 / 32),
+              titleMedium: TextStyle(fontSize: 20, height: 32 / 20),
+              labelLarge: TextStyle(fontSize: 14, height: 24 / 14),
+              bodyMedium: TextStyle(
+                  fontSize: 14, height: 20 / 16, fontWeight: FontWeight.w400),
+              titleSmall: TextStyle(fontSize: 14, height: 20 / 14),
             ),
             scaffoldBackgroundColor: AppColorsLightTheme.backPrimary,
             floatingActionButtonTheme: const FloatingActionButtonThemeData(
@@ -66,7 +66,6 @@ class MyApp extends StatelessWidget {
             appBarTheme:
                 const AppBarTheme(color: AppColorsLightTheme.backPrimary),
             primaryColor: AppColorsLightTheme.primary,
-           
           ),
           home: const SliverAppBarClass(),
         ));
