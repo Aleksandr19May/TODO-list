@@ -18,7 +18,6 @@ abstract class AppColorsLightTheme {
   static const Color elevated = Color(0xFFFFFFFF);
 }
 
-
 abstract class AppColorsDarkTheme {
   static const Color separator = Color.fromRGBO(255, 255, 255, 0.2);
   static const Color overlay = Color(0x52FFFFFF);
@@ -36,5 +35,3 @@ abstract class AppColorsDarkTheme {
   static const Color backSecondary = Color(0xFF252528);
   static const Color elevated = Color(0xFF3C3C3F);
 }
-
-

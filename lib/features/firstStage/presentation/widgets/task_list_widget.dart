@@ -30,7 +30,8 @@ class _TaskListWidgetState extends State<TaskListWidget> {
             resizeDuration: const Duration(seconds: 1),
             key: ValueKey(allTask[index]),
             direction: DismissDirection.horizontal,
-            onDismissed: (direction) => deleteTask(direction, provider, index, allTask),
+            onDismissed: (direction) =>
+                deleteTask(direction, provider, index, allTask),
             secondaryBackground: Container(
               color: Colors.red,
               alignment: Alignment.centerRight,
@@ -68,11 +69,9 @@ class _TaskListWidgetState extends State<TaskListWidget> {
       } else {
         provider.deleteTaskfromlistAllTasks(index);
         provider.deleteTaskfromlistUncompletedTasks(index);
-       
       }
-    } 
-     provider.countAllCompletedTasks();
-    
+    }
+    provider.countAllCompletedTasks();
   }
 
   Future<bool?> markTaskAsCompleted(DismissDirection direction,

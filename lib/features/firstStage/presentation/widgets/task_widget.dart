@@ -71,7 +71,9 @@ class TaskWidget extends StatelessWidget {
                   decoration: allTask[index][1]
                       ? TextDecoration.lineThrough
                       : TextDecoration.none,
-                  color:allTask[index][1] ? AppColorsLightTheme.tertiary : AppColorsLightTheme.primary,
+                  color: allTask[index][1]
+                      ? AppColorsLightTheme.tertiary
+                      : AppColorsLightTheme.primary,
                 ),
               ),
             ],

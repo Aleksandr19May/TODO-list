@@ -193,14 +193,15 @@ class _TaskEditPageState extends State<TaskEditPage> {
                         child: ListTile(
                           minLeadingWidth: widthScreen,
                           contentPadding: EdgeInsets.zero,
-                          
                           subtitle: provider.switcher
-                              ? Text(provider.selectedDay!, style: const TextStyle(
-                              fontSize: AppTextSizes.subhead,
-                              fontWeight: FontWeight.w400,
-                              height: AppHeights.subhead, 
-                              color: AppColorsLightTheme.blue
-                              ),)
+                              ? Text(
+                                  provider.selectedDay!,
+                                  style: const TextStyle(
+                                      fontSize: AppTextSizes.subhead,
+                                      fontWeight: FontWeight.w400,
+                                      height: AppHeights.subhead,
+                                      color: AppColorsLightTheme.blue),
+                                )
                               : const Text(''),
                           title: const Text(
                             'Сделать до',
@@ -266,7 +267,9 @@ class _TaskEditPageState extends State<TaskEditPage> {
                                   style: TextStyle(
                                       color: !provider.isEdited
                                           ? AppColorsLightTheme.disable
-                                          : AppColorsLightTheme.red, fontSize: AppTextSizes.body, height: AppHeights.body),
+                                          : AppColorsLightTheme.red,
+                                      fontSize: AppTextSizes.body,
+                                      height: AppHeights.body),
                                 ),
                               ),
                             ),

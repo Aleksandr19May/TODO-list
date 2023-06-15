@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:todo_list/common/logger.dart';
 
 class ProviderTask extends ChangeNotifier {
   List<List> listAllTasks = [];
@@ -16,6 +17,7 @@ class ProviderTask extends ChangeNotifier {
     listAllTasks[index] = [taskTitle, completed, priority, date];
 
     notifyListeners();
+     LoggerApp.logger.i('Отредактировали таск');
   }
 
   /// Получаем лист выполненых задач
@@ -29,6 +31,7 @@ class ProviderTask extends ChangeNotifier {
     }
 
     notifyListeners();
+    LoggerApp.logger.i('Получаем список выполненных задач');
   }
 
   /// Получаем лист невыполненых задач
@@ -43,12 +46,14 @@ class ProviderTask extends ChangeNotifier {
 
     listUncomletedTasks.addAll(newlist);
     notifyListeners();
+     LoggerApp.logger.i('Получаем лист невыполненых задач');
   }
 
   /// Флаг для понимания, задача редактируется или нет
   void changeEditor(bool boolevo) {
     isEdited = boolevo;
     notifyListeners();
+    LoggerApp.logger.i('Смена флага редактирования задачи');
   }
 
   /// Используется для изменения видимости задач
@@ -59,6 +64,7 @@ class ProviderTask extends ChangeNotifier {
       showedAllTasks = false;
     }
     notifyListeners();
+    LoggerApp.logger.i('Изменяем видимость задач');
   }
 
   /// Используется для создания таска
@@ -66,16 +72,19 @@ class ProviderTask extends ChangeNotifier {
       String taskTitle, bool completed, int? priority, String date) {
     listAllTasks.add([taskTitle, completed, priority, date]);
     notifyListeners();
+    LoggerApp.logger.i('Новый таск создан');
   }
 
   void deleteTaskfromlistUncompletedTasks(int index) {
     listUncomletedTasks.removeAt(index);
     notifyListeners();
+     LoggerApp.logger.i('Удалили таск из списка невыполненных задач');
   }
 
   void deleteTaskfromlistAllTasks(int index) {
     listAllTasks.removeAt(index);
     notifyListeners();
+    LoggerApp.logger.i('Удалили таск из списка всех задач');
   }
 
   /// Используется для изменения чекбокса
@@ -84,6 +93,7 @@ class ProviderTask extends ChangeNotifier {
       listAllTasks[index][1] = value;
     }
     notifyListeners();
+    LoggerApp.logger.i('Значение чекбокса изменилось');
   }
 
   bool switcher = false;
@@ -92,6 +102,7 @@ class ProviderTask extends ChangeNotifier {
   void changeSwitcher(bool value) {
     switcher = value;
     notifyListeners();
+    LoggerApp.logger.i('Изменился свитчер выбора даты');
   }
 
   DateTime? selectedDate =
@@ -108,6 +119,7 @@ class ProviderTask extends ChangeNotifier {
 
     selectedDay = DateFormat('dd MMMM yyyy', 'ru').format(selectedDate!);
     notifyListeners();
+    LoggerApp.logger.i('Дата таска изменилась');
   }
 
   int? priority = 0;
@@ -116,12 +128,8 @@ class ProviderTask extends ChangeNotifier {
   void changePriority(int? value) {
     priority = value;
     notifyListeners();
+    LoggerApp.logger.i('Приоритет таска изменился');
   }
 
-  bool cheking = false;
 
-  void checkChanges(boolevo) {
-    cheking = boolevo;
-    notifyListeners();
-  }
 }

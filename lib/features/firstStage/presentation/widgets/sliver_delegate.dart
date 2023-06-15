@@ -33,10 +33,10 @@ class CustomSliverPersistentHeaderDelegate
                 child: Text(
                   "Мои дела",
                   style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    height: AppHeights.largeTitle,
-                    color: AppColorsLightTheme.primary,
-                    fontSize: titleFontSize(shrinkOffset)),
+                      fontWeight: FontWeight.w500,
+                      height: AppHeights.largeTitle,
+                      color: AppColorsLightTheme.primary,
+                      fontSize: titleFontSize(shrinkOffset)),
                 ),
               ),
               Align(
@@ -52,25 +52,25 @@ class CustomSliverPersistentHeaderDelegate
                       }
                     },
                     child: Image.asset(
-                      
                       provider.showedAllTasks
                           ? 'assets/icons/visibility_off.png'
                           : 'assets/icons/visibility.png',
-                          color: AppColorsLightTheme.blue,
+                      color: AppColorsLightTheme.blue,
                     ),
                   ),
                 ),
               ),
               Padding(
-                padding:
-                    EdgeInsets.only(left: 60, top: titlePaddingtop(shrinkOffset)),
+                padding: EdgeInsets.only(
+                    left: 60, top: titlePaddingtop(shrinkOffset)),
                 child: Text(
                   'Выполнено - ${provider.listComletedTasks.length}',
                   style: TextStyle(
-                        fontSize: AppTextSizes.body,
-                        height: AppHeights.body,
-                      color:
-                          shrinkOffset > 10 ? Colors.transparent : AppColorsLightTheme.tertiary),
+                      fontSize: AppTextSizes.body,
+                      height: AppHeights.body,
+                      color: shrinkOffset > 10
+                          ? Colors.transparent
+                          : AppColorsLightTheme.tertiary),
                 ),
               ),
             ],

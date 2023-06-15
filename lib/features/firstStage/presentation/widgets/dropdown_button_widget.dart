@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:todo_list/common/colors.dart';
 import 'package:todo_list/common/fonts_size.dart';
@@ -14,9 +13,11 @@ class DropButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle style =  const TextStyle(fontSize: AppTextSizes.body,height: AppHeights.body, color: AppColorsLightTheme.primary);
+    TextStyle style = const TextStyle(
+        fontSize: AppTextSizes.body,
+        height: AppHeights.body,
+        color: AppColorsLightTheme.primary);
     return DropdownButton<int>(
-    
         underline: const Divider(
           color: Colors.transparent,
         ),
@@ -27,21 +28,29 @@ class DropButtonWidget extends StatelessWidget {
         onChanged: (value) {
           provider.changePriority(value);
         },
-        items:  [
+        items: [
           DropdownMenuItem(
             value: 0,
-            child: Text('Нет',style: style,),
+            child: Text(
+              'Нет',
+              style: style,
+            ),
           ),
           DropdownMenuItem(
             value: 1,
-            child: Text('Низкий',style: style,),
+            child: Text(
+              'Низкий',
+              style: style,
+            ),
           ),
           const DropdownMenuItem(
             value: 2,
             child: Text(
               '!! Высокий',
               style: TextStyle(
-                  color: AppColorsLightTheme.red,fontSize:AppTextSizes.body, height:AppHeights.body  ),
+                  color: AppColorsLightTheme.red,
+                  fontSize: AppTextSizes.body,
+                  height: AppHeights.body),
             ),
           ),
         ]);
