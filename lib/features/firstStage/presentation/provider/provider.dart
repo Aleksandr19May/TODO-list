@@ -69,7 +69,6 @@ class ProviderTask extends ChangeNotifier {
   }
 
   void deleteTaskfromlistUncompletedTasks(int index) {
- 
     listUncomletedTasks.removeAt(index);
     notifyListeners();
   }

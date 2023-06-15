@@ -17,6 +17,7 @@ class TaskWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      horizontalTitleGap:0,
       leading: Checkbox(
         checkColor: Colors.white,
         fillColor:

@@ -14,13 +14,14 @@ class DropButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButton<int>(
+    
         underline: const Divider(
           color: Colors.transparent,
         ),
         value: provider.priority,
         iconSize: 0,
         elevation: 8,
-        alignment: Alignment.topLeft,
+        alignment: Alignment.centerLeft,
         onChanged: (value) {
           provider.changePriority(value);
         },

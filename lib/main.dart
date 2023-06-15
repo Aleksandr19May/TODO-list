@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_list/common/themes/dark_theme.dart';
-import 'package:todo_list/common/themes/light_theme.dart';
+
+
 
 // ignore: depend_on_referenced_packages
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -36,7 +36,6 @@ class MyApp extends StatelessWidget {
           BlocProvider<TaskListBloc>(
             lazy: false,
             create: (context) => TaskListBloc(
-                // authRepository: RepositoryProvider.of<>(context),
                 ),
           ),
         ],
@@ -49,8 +48,11 @@ class MyApp extends StatelessWidget {
           supportedLocales: const [
             Locale('ru'),
           ],
-          darkTheme: darkTheme(),
-          theme: lightTheme(),
+          
+          
+          theme: ThemeData(
+            
+          ),
           home: const SliverAppBarClass(),
         ));
   }

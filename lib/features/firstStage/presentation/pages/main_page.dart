@@ -67,7 +67,7 @@ class _SliverAppBarClassState extends State<SliverAppBarClass> {
                           const TaskListWidget(),
                           Padding(
                             padding: const EdgeInsets.only(
-                                left: 72, bottom: 14, top: 14),
+                                left: 65, bottom: 14, top: 14),
                             child: InkWell(
                                 onTap: () => Navigator.of(context).push(
                                         MaterialPageRoute(builder: (context) {

@@ -128,6 +128,7 @@ class _TaskEditPageState extends State<TaskEditPage> {
                             constraints: const BoxConstraints(
                                 minHeight: 104, maxHeight: 1000),
                             child: TextField(
+                              textCapitalization: TextCapitalization.words,
                               textInputAction: TextInputAction.done,
                               decoration: const InputDecoration(
                                 contentPadding: EdgeInsets.all(16),
@@ -150,6 +151,7 @@ class _TaskEditPageState extends State<TaskEditPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text('Важность'),
+                            
                             DropButtonWidget(provider: provider),
                           ],
                         )),
