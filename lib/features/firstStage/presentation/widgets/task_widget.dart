@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:todo_list/common/colors.dart';
 import 'package:todo_list/common/fonts_size.dart';
 import 'package:todo_list/features/firstStage/presentation/pages/task_edit_page.dart';
@@ -19,8 +18,7 @@ class TaskWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-     
-  isThreeLine: true,
+      isThreeLine: true,
       titleAlignment: ListTileTitleAlignment.top,
       horizontalTitleGap: 0,
       leading: Checkbox(
@@ -82,7 +80,12 @@ class TaskWidget extends StatelessWidget {
           ),
         ),
       ),
-      subtitle: Text(allTask[index][3] ?? "", style: const TextStyle(fontSize: AppTextSizes.subhead,),),
+      subtitle: Text(
+        allTask[index][3] ?? "",
+        style: const TextStyle(
+          fontSize: AppTextSizes.subhead,
+        ),
+      ),
       trailing: Padding(
         padding: const EdgeInsets.only(top: 14),
         child: InkWell(
@@ -111,10 +114,9 @@ class TaskWidget extends StatelessWidget {
       final bool edited = provider.isEdited;
       final bool showedalltasks = provider.showedAllTasks;
       final String? textTitlefromAllTask = provider.listAllTasks[index][0];
-      final String? textTitlefromUncompletedTask =
-          !provider.showedAllTasks 
-              ? provider.listUncomletedTasks[index][0] ?? ''
-              : null;
+      final String? textTitlefromUncompletedTask = !provider.showedAllTasks
+          ? provider.listUncomletedTasks[index][0] ?? ''
+          : null;
       return TaskEditPage(
         index: index,
         edited: edited,
