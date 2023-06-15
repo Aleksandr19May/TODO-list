@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_list/common/colors.dart';
+import 'package:todo_list/common/fonts_size.dart';
 import 'package:todo_list/features/firstStage/presentation/provider/provider.dart';
 import 'package:todo_list/features/firstStage/presentation/widgets/dropdown_button_widget.dart';
 
@@ -51,7 +52,6 @@ class _TaskEditPageState extends State<TaskEditPage> {
   Widget build(BuildContext context) {
     ProviderTask provider = Provider.of<ProviderTask>(context);
     double widthScreen = MediaQuery.of(context).size.width;
-  
 
     return Scaffold(
       body: SafeArea(
@@ -63,12 +63,15 @@ class _TaskEditPageState extends State<TaskEditPage> {
               expandedHeight: 40,
               leadingWidth: widthScreen,
               leading: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.only(left: 16, right: 16, top: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(
-                      onTap: () => Navigator.of(context).pop(),
+                      onTap: () {
+                        provider.changeEditor(false);
+                        Navigator.of(context).pop();
+                      },
                       child: Image.asset(
                         'assets/icons/close.png',
                       ),
@@ -98,9 +101,12 @@ class _TaskEditPageState extends State<TaskEditPage> {
                         Navigator.of(context).pop();
                       },
                       child: const Text(
-                        'Сохранить',
+                        'СОХРАНИТЬ',
                         style: TextStyle(
-                            fontSize: 16, color: AppColorsLightTheme.blue),
+                            fontSize: 14,
+                            height: 24 / 14,
+                            fontWeight: FontWeight.w500,
+                            color: AppColorsLightTheme.blue),
                       ),
                     ),
                   ],
@@ -128,11 +134,19 @@ class _TaskEditPageState extends State<TaskEditPage> {
                             constraints: const BoxConstraints(
                                 minHeight: 104, maxHeight: 1000),
                             child: TextField(
+                              style: const TextStyle(
+                                  fontSize: AppTextSizes.body,
+                                  height: AppHeights.body,
+                                  color: AppColorsLightTheme.primary),
                               textCapitalization: TextCapitalization.words,
                               textInputAction: TextInputAction.done,
                               decoration: const InputDecoration(
                                 contentPadding: EdgeInsets.all(16),
                                 hintText: 'Что надо сделать...',
+                                hintStyle: TextStyle(
+                                    color: AppColorsLightTheme.tertiary,
+                                    fontSize: AppTextSizes.body,
+                                    height: AppHeights.body),
                                 border: InputBorder.none,
                               ),
                               controller: _textcontroller,
@@ -150,8 +164,13 @@ class _TaskEditPageState extends State<TaskEditPage> {
                             child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text('Важность'),
-                            
+                            const Text(
+                              'Важность',
+                              style: TextStyle(
+                                  fontSize: AppTextSizes.body,
+                                  height: AppHeights.body,
+                                  color: AppColorsLightTheme.primary),
+                            ),
                             DropButtonWidget(provider: provider),
                           ],
                         )),
@@ -174,10 +193,22 @@ class _TaskEditPageState extends State<TaskEditPage> {
                         child: ListTile(
                           minLeadingWidth: widthScreen,
                           contentPadding: EdgeInsets.zero,
+                          
                           subtitle: provider.switcher
-                              ? Text(provider.selectedDay!)
+                              ? Text(provider.selectedDay!, style: const TextStyle(
+                              fontSize: AppTextSizes.subhead,
+                              fontWeight: FontWeight.w400,
+                              height: AppHeights.subhead, 
+                              color: AppColorsLightTheme.blue
+                              ),)
                               : const Text(''),
-                          title: const Text('Сделать до'),
+                          title: const Text(
+                            'Сделать до',
+                            style: TextStyle(
+                                fontSize: AppTextSizes.body,
+                                height: AppHeights.body,
+                                color: AppColorsLightTheme.primary),
+                          ),
                           trailing: Switch(
                             materialTapTargetSize:
                                 MaterialTapTargetSize.shrinkWrap,
@@ -208,7 +239,8 @@ class _TaskEditPageState extends State<TaskEditPage> {
                             AbsorbPointer(
                               absorbing: !provider.isEdited ? true : false,
                               child: InkWell(
-                                onTap: () => provider.deleteTaskfromlistAllTasks(widget.index),
+                                onTap: () => provider
+                                    .deleteTaskfromlistAllTasks(widget.index),
                                 child: Image.asset(
                                   'assets/icons/delete.png',
                                   color: !provider.isEdited
@@ -224,16 +256,17 @@ class _TaskEditPageState extends State<TaskEditPage> {
                               absorbing: !provider.isEdited ? true : false,
                               child: InkWell(
                                 onTap: () {
-                                  provider.deleteTaskfromlistAllTasks(widget.index);
-                                 afterCreatingOrDeleting(provider);
-                                 Navigator.of(context).pop();
-                                } ,
+                                  provider
+                                      .deleteTaskfromlistAllTasks(widget.index);
+                                  afterCreatingOrDeleting(provider);
+                                  Navigator.of(context).pop();
+                                },
                                 child: Text(
                                   'Удалить',
                                   style: TextStyle(
                                       color: !provider.isEdited
                                           ? AppColorsLightTheme.disable
-                                          : Colors.red),
+                                          : AppColorsLightTheme.red, fontSize: AppTextSizes.body, height: AppHeights.body),
                                 ),
                               ),
                             ),
@@ -276,4 +309,3 @@ class _TaskEditPageState extends State<TaskEditPage> {
     });
   }
 }
-

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_list/common/colors.dart';
+import 'package:todo_list/common/fonts_size.dart';
 import 'package:todo_list/features/firstStage/presentation/provider/provider.dart';
 
 class CustomSliverPersistentHeaderDelegate
@@ -46,9 +48,11 @@ class CustomSliverPersistentHeaderDelegate
                       }
                     },
                     child: Image.asset(
+                      
                       provider.showedAllTasks
                           ? 'assets/icons/visibility_off.png'
                           : 'assets/icons/visibility.png',
+                          color: AppColorsLightTheme.blue,
                     ),
                   ),
                 ),
@@ -59,8 +63,10 @@ class CustomSliverPersistentHeaderDelegate
                 child: Text(
                   'Выполнено - ${provider.listComletedTasks.length}',
                   style: TextStyle(
+                        fontSize: AppTextSizes.body,
+                        height: AppHeights.body,
                       color:
-                          shrinkOffset > 10 ? Colors.transparent : Colors.black),
+                          shrinkOffset > 10 ? Colors.transparent : AppColorsLightTheme.tertiary),
                 ),
               ),
             ],

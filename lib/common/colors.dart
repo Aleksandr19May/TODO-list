@@ -36,3 +36,5 @@ abstract class AppColorsDarkTheme {
   static const Color backSecondary = Color(0xFF252528);
   static const Color elevated = Color(0xFF3C3C3F);
 }
+
+
