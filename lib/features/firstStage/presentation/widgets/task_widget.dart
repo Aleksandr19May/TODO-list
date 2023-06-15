@@ -19,6 +19,8 @@ class TaskWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+     
+  isThreeLine: true,
       titleAlignment: ListTileTitleAlignment.top,
       horizontalTitleGap: 0,
       leading: Checkbox(
@@ -80,7 +82,7 @@ class TaskWidget extends StatelessWidget {
           ),
         ),
       ),
-      subtitle: Text(allTask[index][3] ?? ""),
+      subtitle: Text(allTask[index][3] ?? "", style: const TextStyle(fontSize: AppTextSizes.subhead,),),
       trailing: Padding(
         padding: const EdgeInsets.only(top: 14),
         child: InkWell(
