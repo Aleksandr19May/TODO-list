@@ -138,7 +138,7 @@ class _TaskEditPageState extends State<TaskEditPage> {
                                   fontSize: AppTextSizes.body,
                                   height: AppHeights.body,
                                   color: AppColorsLightTheme.primary),
-                              textCapitalization: TextCapitalization.words,
+                              textCapitalization: TextCapitalization.sentences,
                               textInputAction: TextInputAction.done,
                               decoration: const InputDecoration(
                                 contentPadding: EdgeInsets.all(16),

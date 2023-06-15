@@ -30,10 +30,10 @@ class TaskWidget extends StatelessWidget {
           if (states.contains(MaterialState.selected)) {
             return Colors.green;
           }
-          final DateTime taskDay = allTask[index][3] == ''
-              ? provider.currentDate
-              : DateFormat('dd MMMM yyyy', 'ru').parse(allTask[index][3]);
-          if (taskDay.isBefore(provider.currentDate)) {
+          // final DateTime taskDay = allTask[index][3] == ''
+          //     ? provider.currentDate
+          //     : DateFormat('dd MMMM yyyy', 'ru').parse(allTask[index][3]);
+          if (allTask[index][2] == 2) {
             return Colors.red;
           } else {
             return Colors.green;
@@ -112,7 +112,7 @@ class TaskWidget extends StatelessWidget {
       final bool showedalltasks = provider.showedAllTasks;
       final String? textTitlefromAllTask = provider.listAllTasks[index][0];
       final String? textTitlefromUncompletedTask =
-          provider.listUncomletedTasks.isNotEmpty
+          !provider.showedAllTasks 
               ? provider.listUncomletedTasks[index][0] ?? ''
               : null;
       return TaskEditPage(
