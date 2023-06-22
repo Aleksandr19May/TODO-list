@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_list/common/colors.dart';
 import 'package:todo_list/common/fonts_size.dart';
 import 'package:todo_list/features/firstStage/presentation/provider/provider.dart';
+import 'package:todo_list/generated/locale_keys.g.dart';
 
 class CustomSliverPersistentHeaderDelegate
     extends SliverPersistentHeaderDelegate {
@@ -31,7 +33,7 @@ class CustomSliverPersistentHeaderDelegate
                     top: iconPaddingtop(shrinkOffset),
                     left: titlePaddingleft(shrinkOffset)),
                 child: Text(
-                  "Мои дела",
+                  LocaleKeys.myTasks.tr(),
                   style: TextStyle(
                       fontWeight: FontWeight.w500,
                       height: AppHeights.largeTitle,

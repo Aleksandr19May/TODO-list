@@ -1,9 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_list/common/colors.dart';
 import 'package:todo_list/common/fonts_size.dart';
 import 'package:todo_list/features/firstStage/presentation/provider/provider.dart';
 import 'package:todo_list/features/firstStage/presentation/widgets/dropdown_button_widget.dart';
+import 'package:todo_list/generated/locale_keys.g.dart';
 
 class TaskEditPage extends StatefulWidget {
   final int index;
@@ -140,10 +142,10 @@ class _TaskEditPageState extends State<TaskEditPage> {
                                   color: AppColorsLightTheme.primary),
                               textCapitalization: TextCapitalization.sentences,
                               textInputAction: TextInputAction.done,
-                              decoration: const InputDecoration(
-                                contentPadding: EdgeInsets.all(16),
-                                hintText: 'Что надо сделать...',
-                                hintStyle: TextStyle(
+                              decoration:  InputDecoration(
+                                contentPadding: const EdgeInsets.all(16),
+                                hintText: LocaleKeys.whatToDO.tr(),
+                                hintStyle: const TextStyle(
                                     color: AppColorsLightTheme.tertiary,
                                     fontSize: AppTextSizes.body,
                                     height: AppHeights.body),
