@@ -11,7 +11,7 @@
 В качестве логгера использовался пакет Logger. В качестве стейтменеджера использовался пакет Provider. Код форматировался согласно гайдам команды разработчиков от Dart. Предусмотрена возможность дальнейшего расширения приложения (код разбит на слои). Так же была создана уникальная иконка и splash screen, который отображает вторую иконку приложения. 
 
 
-Ссылка на проект в формате apk - https://github.com/Aleksandr19May/TODO-list/releases.
+Ссылка на проект в формате apk - [https://github.com/Aleksandr19May/TODO-list/releases](https://github.com/Aleksandr19May/TODO-list/releases/tag/v1.0.0).
 
 # Скриншоты и скринкаст
 ![Screenshot_1686841369](https://github.com/Aleksandr19May/TODO-list/assets/116716020/23ab371f-fd33-4222-8241-d4aba2858961)
