@@ -1,16 +1,16 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
 abstract class  LocaleKeys {
-  static const myTasks = 'myTasks';
-  static const complited = 'complited';
-  static const newTask = 'newTask';
-  static const save = 'save';
-  static const whatToDO = 'whatToDO';
-  static const importance = 'importance';
-  static const low = 'low';
-  static const no = 'no';
-  static const high = 'high';
-  static const doBefore = 'doBefore';
-  static const delete = 'delete';
+  static const myTasks = 'Мои дела';
+  static const complited = 'Выполнено';
+  static const newTask = 'Новое';
+  static const save = 'СОХРАНИТЬ';
+  static const whatToDO = 'Что надо сделать...';
+  static const importance = 'Важность';
+  static const low = 'Низкая';
+  static const no = 'Нет';
+  static const high = '!! Высокая';
+  static const doBefore = 'Сделать до';
+  static const delete = 'Удалить';
 
 }

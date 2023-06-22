@@ -66,7 +66,7 @@ class CustomSliverPersistentHeaderDelegate
                 padding: EdgeInsets.only(
                     left: 60, top: titlePaddingtop(shrinkOffset)),
                 child: Text(
-                  'Выполнено - ${provider.listComletedTasks.length}',
+                  '${LocaleKeys.complited.tr()} - ${provider.listComletedTasks.length}',
                   style: TextStyle(
                       fontSize: AppTextSizes.body,
                       height: AppHeights.body,

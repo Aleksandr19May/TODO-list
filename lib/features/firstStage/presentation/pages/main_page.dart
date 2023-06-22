@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_list/common/colors.dart';
 import 'package:todo_list/common/fonts_size.dart';
@@ -7,6 +8,7 @@ import 'package:todo_list/features/firstStage/presentation/pages/task_edit_page.
 import 'package:todo_list/features/firstStage/presentation/widgets/sliver_delegate.dart';
 
 import 'package:todo_list/features/firstStage/presentation/widgets/task_list_widget.dart';
+import 'package:todo_list/generated/locale_keys.g.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({
@@ -75,9 +77,9 @@ class _SliverAppBarClassState extends State<SliverAppBarClass> {
                                         MaterialPageRoute(builder: (context) {
                                       return const TaskEditPage();
                                     })),
-                                child: const Text(
-                                  'Новое',
-                                  style: TextStyle(
+                                child:  Text(
+                                  LocaleKeys.newTask.tr(),
+                                  style: const TextStyle(
                                       fontSize: AppTextSizes.button,
                                       height: AppHeights.body,
                                       color: AppColorsLightTheme.tertiary),

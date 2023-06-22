@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_list/common/colors.dart';
 import 'package:todo_list/common/fonts_size.dart';
 import 'package:todo_list/features/firstStage/presentation/provider/provider.dart';
+import 'package:todo_list/generated/locale_keys.g.dart';
 
 class DropButtonWidget extends StatelessWidget {
   const DropButtonWidget({
@@ -32,22 +34,22 @@ class DropButtonWidget extends StatelessWidget {
           DropdownMenuItem(
             value: 0,
             child: Text(
-              'Нет',
+              LocaleKeys.no.tr(),
               style: style,
             ),
           ),
           DropdownMenuItem(
             value: 1,
             child: Text(
-              'Низкий',
+              LocaleKeys.low.tr(),
               style: style,
             ),
           ),
-          const DropdownMenuItem(
+           DropdownMenuItem(
             value: 2,
             child: Text(
-              '!! Высокий',
-              style: TextStyle(
+              LocaleKeys.high.tr(),
+              style: const TextStyle(
                   color: AppColorsLightTheme.red,
                   fontSize: AppTextSizes.body,
                   height: AppHeights.body),

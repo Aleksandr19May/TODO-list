@@ -102,9 +102,9 @@ class _TaskEditPageState extends State<TaskEditPage> {
                         afterCreatingOrDeleting(provider);
                         Navigator.of(context).pop();
                       },
-                      child: const Text(
-                        'СОХРАНИТЬ',
-                        style: TextStyle(
+                      child:  Text(
+                        LocaleKeys.save.tr(),
+                        style: const TextStyle(
                             fontSize: 14,
                             height: 24 / 14,
                             fontWeight: FontWeight.w500,
@@ -166,9 +166,9 @@ class _TaskEditPageState extends State<TaskEditPage> {
                             child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              'Важность',
-                              style: TextStyle(
+                             Text(
+                              LocaleKeys.importance.tr(),
+                              style: const TextStyle(
                                   fontSize: AppTextSizes.body,
                                   height: AppHeights.body,
                                   color: AppColorsLightTheme.primary),
@@ -205,9 +205,9 @@ class _TaskEditPageState extends State<TaskEditPage> {
                                       color: AppColorsLightTheme.blue),
                                 )
                               : const Text(''),
-                          title: const Text(
-                            'Сделать до',
-                            style: TextStyle(
+                          title:  Text(
+                            LocaleKeys.complited.tr(),
+                            style: const TextStyle(
                                 fontSize: AppTextSizes.body,
                                 height: AppHeights.body,
                                 color: AppColorsLightTheme.primary),
@@ -265,7 +265,7 @@ class _TaskEditPageState extends State<TaskEditPage> {
                                   Navigator.of(context).pop();
                                 },
                                 child: Text(
-                                  'Удалить',
+                                  LocaleKeys.delete.tr(),
                                   style: TextStyle(
                                       color: !provider.isEdited
                                           ? AppColorsLightTheme.disable
