@@ -1,7 +1,7 @@
 name: todo_list
 description: A new Flutter project.
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: 'none' 
 
 
 version: 1.0.0+1
@@ -12,8 +12,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-
 
   cupertino_icons: ^1.0.2
   equatable: ^2.0.5
@@ -26,6 +24,10 @@ dependencies:
   logger: ^1.4.0
   uuid: ^3.0.7
   easy_localization: ^3.0.2
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+ 
+
   
 
 

@@ -1,11 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
-
-
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:todo_list/common/colors.dart';
+import 'package:todo_list/features/firstStage/domain/entities/task.dart';
 import 'package:todo_list/features/firstStage/presentation/bloc/task_list_bloc.dart';
 import 'package:todo_list/features/firstStage/presentation/pages/main_page.dart';
 import 'package:todo_list/features/firstStage/presentation/provider/provider.dart';
@@ -13,6 +13,11 @@ import 'package:todo_list/generated/codegen_loader.g.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  if (Hive.isAdapterRegistered(1)) {
+    Hive.registerAdapter(HiveTask());
+  }
+  await Hive.initFlutter();
+  await Hive.openBox<Task>('Tasks');
   await EasyLocalization.ensureInitialized();
   initializeDateFormatting('ru', null).then((_) {
     runApp(
@@ -23,10 +28,10 @@ void main() async {
           ),
         ],
         child: EasyLocalization(
-          assetLoader: const CodegenLoader(),
+            assetLoader: const CodegenLoader(),
             supportedLocales: const [Locale('en'), Locale('ru')],
             path:
-                'assets/translations', // <-- change the path of the translation files
+                'assets/translations', 
             fallbackLocale: const Locale('ru'),
             child: const MyApp()),
       ),
@@ -74,5 +79,3 @@ class MyApp extends StatelessWidget {
         ));
   }
 }
-
-

@@ -1,8 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_list/common/colors.dart';
 import 'package:todo_list/common/fonts_size.dart';
+import 'package:todo_list/features/firstStage/domain/entities/task.dart';
 import 'package:todo_list/features/firstStage/presentation/provider/provider.dart';
 import 'package:todo_list/features/firstStage/presentation/widgets/dropdown_button_widget.dart';
 import 'package:todo_list/generated/locale_keys.g.dart';
@@ -28,10 +30,12 @@ class TaskEditPage extends StatefulWidget {
 
 class _TaskEditPageState extends State<TaskEditPage> {
   TextEditingController _textcontroller = TextEditingController();
+  late Box<Task> saver;
 
   @override
   void initState() {
     super.initState();
+    saver = Hive.box<Task>('Tasks');
     if (widget.edited) {
       String? textTask = '';
       if (widget.showedalltasks) {
@@ -46,7 +50,6 @@ class _TaskEditPageState extends State<TaskEditPage> {
   @override
   void dispose() {
     _textcontroller.dispose();
-
     super.dispose();
   }
 
@@ -89,6 +92,15 @@ class _TaskEditPageState extends State<TaskEditPage> {
                               provider.switcher
                                   ? '${provider.selectedDay}'
                                   : '');
+                          saver.add(Task(
+                            completed: false,
+                            date: provider.switcher
+                                ? '${provider.selectedDay}'
+                                : '',
+                            taskTitle: _textcontroller.text,
+                            uuid: '',
+                            priority: 0,
+                          ));
                         } else {
                           provider.createTask(
                               _textcontroller.text,
@@ -102,7 +114,7 @@ class _TaskEditPageState extends State<TaskEditPage> {
                         afterCreatingOrDeleting(provider);
                         Navigator.of(context).pop();
                       },
-                      child:  Text(
+                      child: Text(
                         LocaleKeys.save.tr(),
                         style: const TextStyle(
                             fontSize: 14,
@@ -142,7 +154,7 @@ class _TaskEditPageState extends State<TaskEditPage> {
                                   color: AppColorsLightTheme.primary),
                               textCapitalization: TextCapitalization.sentences,
                               textInputAction: TextInputAction.done,
-                              decoration:  InputDecoration(
+                              decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.all(16),
                                 hintText: LocaleKeys.whatToDO.tr(),
                                 hintStyle: const TextStyle(
@@ -166,7 +178,7 @@ class _TaskEditPageState extends State<TaskEditPage> {
                             child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                             Text(
+                            Text(
                               LocaleKeys.importance.tr(),
                               style: const TextStyle(
                                   fontSize: AppTextSizes.body,
@@ -205,7 +217,7 @@ class _TaskEditPageState extends State<TaskEditPage> {
                                       color: AppColorsLightTheme.blue),
                                 )
                               : const Text(''),
-                          title:  Text(
+                          title: Text(
                             LocaleKeys.complited.tr(),
                             style: const TextStyle(
                                 fontSize: AppTextSizes.body,
